@@ -11,7 +11,7 @@ const app = express()
 app.use(cors({
     origin: ["http://localhost:5173"],
     methods: ['GET', 'POST', 'PUT', "DELETE", "CREATE"],
-    credentials: true
+    credentials: false
 }))
 app.use(express.json())
 app.use(cookieParser())
