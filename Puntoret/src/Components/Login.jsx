@@ -14,7 +14,7 @@ const PuntorLogin = ({ setWorkerId }) => {
   axios.defaults.withCredentials = true;
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post(`https://project-for-ubt-server.vercel.app/auth/puntorlogin`, values)
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/puntorlogin`, values)
       .then(result => {
         if (result.data.loginStatus) {
 
