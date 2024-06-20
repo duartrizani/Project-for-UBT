@@ -183,14 +183,15 @@ router.delete('/delete_employee/:id', (req, res) => {
   
   router.get('/programer_count', async (req, res) => {
     try {
-      const sql = "select count(id) from programer";
+      const sql = "SELECT COUNT(id) AS count FROM programer";
       const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].admin }); // Assuming the count is in the first element
+      return res.json({ Status: true, Result: result[0].count }); // Access the count property
     } catch (err) {
       console.error(err);
-      return res.status(500).json({ Status: false, Error: `Error fetching admin count: ${err.message}` });
+      return res.status(500).json({ Status: false, Error: `Error fetching programer count: ${err.message}` });
     }
   });
+  
   
   
   // Example with async/await (optional)
