@@ -29,7 +29,7 @@ const KAddEmployee = () => {
       axios.post(`${import.meta.env.VITE_API_URL}/krye/add_employee`, employee)
       .then(result => {
           if(result.data.Status) {
-              navigate('/kryepuntor/employee')
+              navigate('/gamedesign/employee')
           } else {
               alert(result.data.Error)
               

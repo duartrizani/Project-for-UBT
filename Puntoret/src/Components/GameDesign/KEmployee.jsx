@@ -53,7 +53,7 @@ const KEmployee = () => {
       <div className="d-flex justify-content-center max-lg:py-5 text-lg font-bold">
         <h3>Lista Puntorëve</h3>
       </div>
-      <Link to="/kryepuntor/add_employee" className="btn btn-success ">
+      <Link to="/gamedesign/add_employee" className="btn btn-success ">
         Shto Puntorë
       </Link>
       <div className="mt-3 max-lg:hidden">
@@ -78,13 +78,13 @@ const KEmployee = () => {
                 <td>{e.role}</td>
                 <td>
                   <Link
-                    to={`/kryepuntor/oret/` + e.worker_id}
+                    to={`/gamedesign/oret/` + e.worker_id}
                     className="btn btn-primary btn-sm me-2"
                   >
                     Orët
                   </Link>
                   <Link
-                    to={`/kryepuntor/edit_employee/` + e.worker_id}
+                    to={`/gamedesign/edit_employee/` + e.worker_id}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -140,10 +140,10 @@ const KEmployee = () => {
               <tr className="flex items-center text-wrap justify-between">
                 <th className="text-left max-w-[160px]">Action</th>
                 <td className="flex justify-end">
-                  <Link to={`/kryepuntor/oret/` + e.worker_id} className="btn btn-primary btn-sm me-2">
+                  <Link to={`/gamedesign/oret/` + e.worker_id} className="btn btn-primary btn-sm me-2">
                     Orët
                   </Link>
-                  <Link to={`/kryepuntor/edit_employee/` + e.worker_id} className="btn btn-info btn-sm me-2">
+                  <Link to={`/gamedesign/edit_employee/` + e.worker_id} className="btn btn-info btn-sm me-2">
                     Edit
                   </Link>
                   <button className="btn btn-warning btn-sm" onClick={() => handleDelete(e.worker_id)}>

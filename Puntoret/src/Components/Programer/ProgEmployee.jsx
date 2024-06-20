@@ -6,7 +6,7 @@ const ProgEmployee = () => {
   const [employee, setEmployee] = useState([]);
   const navigate = useNavigate()
   const [dropdownState, setDropdownState] = useState({ isOpen: false, activeDropdown: null });
-  const [nextId, setNextId] = useState(1);
+
 
 
 

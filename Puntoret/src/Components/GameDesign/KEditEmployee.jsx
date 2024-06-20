@@ -28,7 +28,7 @@ const KEditEmployee = () => {
     axios.put(`${import.meta.env.VITE_API_URL}/krye/edit_employee/` + id, employee)
       .then(result => {
         if (result.data.Status) {
-          navigate('/kryepuntor/employee').reload();
+          navigate('/gamedesign/employee').reload();
         } else {
           alert(result.data.Error);
         }

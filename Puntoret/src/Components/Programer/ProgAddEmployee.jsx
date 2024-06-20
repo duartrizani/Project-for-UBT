@@ -29,7 +29,7 @@ const ProgAddEmployee = () => {
       axios.post(`${import.meta.env.VITE_API_URL}/prog/add_employee`, employee)
       .then(result => {
           if(result.data.Status) {
-              navigate('/progpuntor/employee')
+              navigate('/programer/employee')
           } else {
               alert(result.data.Error)
               

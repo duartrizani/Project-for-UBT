@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CSVLink } from 'react-csv';
+import ExcelJS from 'exceljs'; // Import ExcelJS library
 
-const ProgPuntoret = () => {
+
+const SoundEffect = () => {
     const [employee, setEmployee] = useState([]);
     const [worker, setWorker] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -14,7 +17,7 @@ const ProgPuntoret = () => {
 
     useEffect(() => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/prog/klista`)
+            .get(`${import.meta.env.VITE_API_URL}/sound/klista`)
             .then((result) => {
                 if (result.data.Status) {
                     // Filter employee data by month
@@ -29,7 +32,7 @@ const ProgPuntoret = () => {
             .catch((err) => console.log(err));
 
         axios
-            .get(`${import.meta.env.VITE_API_URL}/prog/employee`)
+            .get(`${import.meta.env.VITE_API_URL}/sound/employee`)
             .then((result) => {
                 if (result.data.Status) {
                     setWorker(result.data.Result);
@@ -49,11 +52,105 @@ const ProgPuntoret = () => {
     };
 
 
+    const csvData = [];
+// Add titles at the top
+csvData.push(['Emri', 'Paga / orë (NETO)', 'Orët', 'Paga']);
+// Add data for each worker
+worker.forEach(w => {
+    const filteredEmployee = employee.filter((e) => e.worker_id === w.worker_id && e.data.slice(0, 7) === selectedMonth);
+    const totalOra = filteredEmployee.reduce((acc, curr) => acc + curr.ora, 0);
+    const currencyFormatter = new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR'
+    });
+    const workerRow = [
+        w.name,
+        currencyFormatter.format(w.salary), // Format salary as currency
+        `${totalOra} orë`,
+        currencyFormatter.format(totalOra * w.salary) // Format total pay as currency
+    ];
+    csvData.push(workerRow);
+    const dropdownRows = filteredEmployee.map(e => [
+        new Date(e.data).toLocaleDateString('en-UK'),
+        e.dita,
+        `${e.ora} orë`
+    ]);
+    csvData.push(...dropdownRows);
+    // Add a line of dashes between each worker's data
+    csvData.push(['-----']);
+});
+
+
+
+const exportToExcel = () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet1');
+
+    // Add data to the worksheet
+    csvData.forEach((row, rowIndex) => {
+        if (rowIndex === 0) {
+            // Highlight title cells with yellow background color
+            const titleRow = worksheet.addRow(row);
+            titleRow.eachCell(cell => {
+                cell.fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: { argb: 'FFFF00' } // Yellow background color
+                };
+            });
+        } else {
+            worksheet.addRow(row);
+        }
+    });
+
+    // Adjust column widths
+    worksheet.columns.forEach(column => {
+        column.width = 20; // Set the width as needed
+    });
+
+    // Save the workbook to a file
+    workbook.xlsx.writeBuffer()
+        .then(buffer => {
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const filename = `worker_data_${selectedMonth}.xlsx`;
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                // For IE
+                window.navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // For other browsers
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            }
+        })
+        .catch(err => {
+            console.error('Error exporting to Excel:', err);
+        });
+};
+
+    
+
+
     return (
         <div className="lg:px-5 mt-3 pl-2">
             <div className="flex justify-center py-5 text-lg font-bold">
                 <h3>Puntorët Rroga dhe Orët</h3>
             </div>
+
+            <div className="flex justify-end mt-2 mr-2">
+                <button
+                    onClick={exportToExcel}
+                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                >
+                    Download Excel
+                </button>
+            </div>
+
 
             <div className="mb-3 pr-2">
                 <label htmlFor="monthInput" className="block text-sm font-medium text-gray-700 mb-1">Select Date:</label>
@@ -173,10 +270,10 @@ const ProgPuntoret = () => {
                                         </>
                                     )}
 
-                                </React.Fragment>
+                                </React.Fragment>                          
                             );
 
-
+                            
                         })}
                     </tbody>
                 </table>
@@ -191,4 +288,4 @@ const ProgPuntoret = () => {
     );
 };
 
-export default ProgPuntoret;
+export default SoundEffect;

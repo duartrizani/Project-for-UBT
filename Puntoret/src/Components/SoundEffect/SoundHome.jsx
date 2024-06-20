@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const SoundHome = () => {
-  const [workerCount, setWorkerCount] = useState(0);
-  const [puntorCount, setPuntorCount] = useState(0);
-  const [mjeshterCount, setMjeshterCount] = useState(0);
+  const [seniorCount, setSeniorCount] = useState(0);
+  const [juniorCount, setJuniorCount] = useState(0);
+  const [midlevelCount, setMidlevelCount] = useState(0);
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const SoundHome = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/senior_count`);
         if (response.data.Status) {
-          setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setSeniorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -29,7 +29,7 @@ const SoundHome = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/junior_count`);
         if (response.data.Status) {
-          setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setJuniorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -46,7 +46,7 @@ const SoundHome = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/midlevel_count`);
         if (response.data.Status) {
-          setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setMidlevelCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -87,7 +87,7 @@ const SoundHome = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{workerCount}</h5>
+                <h5>{seniorCount}</h5>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ const SoundHome = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{mjeshterCount}</h5>
+                <h5>{midlevelCount}</h5>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ const SoundHome = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{puntorCount}</h5>
+                <h5>{juniorCount}</h5>
               </div>
             </div>
           </div>
@@ -125,12 +125,11 @@ const SoundHome = () => {
       </div>
 
       <div className='flex flex-col mt-4 pt-3 pl-5 max-md:w-full'>
-        <h3 className=''>List of Employees in Team "uji"</h3>
+        <h3 className=''>Kryepuntori i Team "Sound Effect"</h3>
         <table className="table justify-evenly">
           <thead>
             <tr>
               <th className='w-1/4'>Name</th>
-              <th className='w-1/4'>Email</th>
               <th className='w-1/4'>Role</th>
               <th className='w-1/4'>Action</th>
             </tr>
@@ -139,11 +138,10 @@ const SoundHome = () => {
             {employees.map(employee => (
               <tr key={employee.worker_id}>
                 <td>{employee.name}</td>
-                <td>{employee.email}</td>
                 <td>{employee.role}</td>
                 <td>
                   {/* Add action buttons or links here */}
-                  <button>View</button>
+                  <button className='btn btn-primary btn-sm'>View</button>
                 </td>
               </tr>
             ))}

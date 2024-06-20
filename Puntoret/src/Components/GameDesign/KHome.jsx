@@ -130,7 +130,6 @@ const KHome = () => {
           <thead>
             <tr>
               <th className='w-1/4'>Name</th>
-              <th className='w-1/4'>Email</th>
               <th className='w-1/4'>Role</th>
               <th className='w-1/4'>Action</th>
             </tr>
@@ -139,11 +138,10 @@ const KHome = () => {
             {employees.map(employee => (
               <tr key={employee.worker_id}>
                 <td>{employee.name}</td>
-                <td>{employee.email}</td>
                 <td>{employee.role}</td>
                 <td>
                   {/* Add action buttons or links here */}
-                  <button>View</button>
+                  <button className='btn btn-primary btn-sm'>View</button>
                 </td>
               </tr>
             ))}

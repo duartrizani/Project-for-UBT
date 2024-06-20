@@ -165,7 +165,7 @@ const Klista = () => {
 
       <div className="flex justify-between">
 
-        <Link to="/kryepuntor/add_klista" className="btn btn-success ">
+        <Link to="/gamedesign/add_klista" className="btn btn-success ">
           Shto Listë
         </Link>
 
@@ -217,7 +217,7 @@ const Klista = () => {
                 <td>{e.detaje}</td>
                 <td>
                   <Link
-                    to={`/kryepuntor/edit_klista/${e.id}`}
+                    to={`/gamedesign/edit_klista/${e.id}`}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -286,7 +286,7 @@ const Klista = () => {
                     <tr className="flex items-center text-wrap justify-between">
                       <th className="text-left max-w-[160px]">Action</th>
                       <td className="flex justify-end">
-                        <Link to={`/kryepuntor/edit_klista/` + e.id} className="btn btn-info btn-sm me-2">
+                        <Link to={`/gamedesign/edit_klista/` + e.id} className="btn btn-info btn-sm me-2">
                           Edit
                         </Link>
                         <button

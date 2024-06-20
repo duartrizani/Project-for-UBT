@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
-const Kryepuntor = () => {
+const gamedesign = () => {
   const anvigate = useNavigate()
   axios.defaults.withCredentials = true
   const handleLogout = () => {
@@ -11,7 +11,7 @@ const Kryepuntor = () => {
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        localStorage.removeItem("role", "uji");
+        localStorage.removeItem("role", "gamedesign");
         anvigate('/')
       }
     })
@@ -35,7 +35,7 @@ const Kryepuntor = () => {
             >
               <li className="w-100">
                 <Link
-                  to="/kryepuntor"
+                  to="/gamedesign"
                   className="nav-link text-white px-0 align-middle"
                 >
                   <i className="fs-4 bi-speedometer2 ms-2"></i>
@@ -44,7 +44,7 @@ const Kryepuntor = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/employee"
+                  to="/gamedesign/employee"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi-people ms-2"></i>
@@ -55,7 +55,7 @@ const Kryepuntor = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/klista"
+                  to="/gamedesign/klista"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="bi bi-columns text-xl ms-2"></i>
@@ -67,7 +67,7 @@ const Kryepuntor = () => {
 
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/puntoret"
+                  to="/gamedesign/puntoret"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="bi bi-person text-xl ms-2"></i>
@@ -101,23 +101,23 @@ const Kryepuntor = () => {
       {/* Navigation Bar - Mobile (Bottom) */}
       <ul className="lg:hidden fixed w-full bg-dark p-3 flex justify-around items-center overflow-hidden">
   <li className="">
-    <Link to="/kryepuntor" className="text-white">
+    <Link to="/gamedesign" className="text-white">
       <i className="bi bi-speedometer2 text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kryepuntor/employee" className="text-white">
+    <Link to="/gamedesign/employee" className="text-white">
       <i className="bi bi-people text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kryepuntor/klista" className="text-white">
+    <Link to="/gamedesign/klista" className="text-white">
       <i className="bi bi-columns text-xl"></i>
     </Link>
   </li>
 
   <li className="">
-    <Link to="/kryepuntor/puntoret" className="text-white">
+    <Link to="/gamedesign/puntoret" className="text-white">
       <i className="bi bi-person text-xl"></i>
     </Link>
   </li>
@@ -132,4 +132,4 @@ const Kryepuntor = () => {
   );
 };
 
-export default Kryepuntor;
+export default gamedesign;

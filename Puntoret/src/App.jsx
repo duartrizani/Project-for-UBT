@@ -53,6 +53,7 @@ import SoundEditLista from './Components/SoundEffect/SoundEditLista'
 import SoundAddLista from './Components/SoundEffect/SoundAddLista'
 import SoundOret from './Components/SoundEffect/SoundOret'
 import SoundPuntoret from './Components/SoundEffect/SoundPuntoret'
+import SoundEffect from './Components/Kontabilist/SoundEffect'
 
 
 
@@ -142,6 +143,7 @@ function App() {
           <Route path='' element={<KontaHome />}></Route>
           <Route path='/kontabilist/gamedesign' element={<GameDesign />}></Route>
           <Route path='/kontabilist/programers' element={<Programers />}></Route>
+          <Route path='/kontabilist/soundeffect' element={<SoundEffect />}></Route>
 
         </Route>
 

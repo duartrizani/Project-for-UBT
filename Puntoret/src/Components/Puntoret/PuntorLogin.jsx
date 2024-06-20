@@ -17,7 +17,7 @@ const PuntorLogin = ({ setWorkerId }) => {
         .then(result => {
           if (result.data.loginStatus) {
     
-            const team = result.data.userData.team; // Assuming 'team' is the property that holds the team information
+            const team = result.data.userData.team; //team = role
             switch (team) {
               case 'admin':
                 localStorage.setItem("valid", true)
@@ -35,6 +35,7 @@ const PuntorLogin = ({ setWorkerId }) => {
 
               case 'kontabilist':
                 localStorage.setItem("valid", true)
+                  localStorage.setItem("role", "kontabilist");
                 navigate('/kontabilist')
                 break;
 
@@ -59,7 +60,7 @@ const PuntorLogin = ({ setWorkerId }) => {
 
   useEffect(() => {
     if (error) {
-      // Display error message for a short duration (optional)
+      // Display error message for a short duration 
       setTimeout(() => setError(null), 5000); // Clear error after 5 seconds
     }
   }, [error]);

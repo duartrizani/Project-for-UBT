@@ -39,12 +39,12 @@ const KEditLista = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        navigate('/kryepuntor/klista')
+        navigate('/gamedesign/klista')
 
         axios.put(`${import.meta.env.VITE_API_URL}/krye/edit_klista/` + id, employee)
             .then(result => {
                 if (result.data.Status) {
-                    navigate('/kryepuntor/klista')
+                    navigate('/gamedesign/klista')
                     window.location.reload()
                 } else {
                     alert(result.data.Error)

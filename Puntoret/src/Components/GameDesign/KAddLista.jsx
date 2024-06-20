@@ -76,7 +76,7 @@ const KAddLista = () => {
         axios.post(`${import.meta.env.VITE_API_URL}/krye/addworkerklista`, selectedEmployeesData)
             .then(result => {
                 if (result.data.Status) {
-                    navigate('/kryepuntor/klista');
+                    navigate('/gamedesign/klista');
                 } else {
                     alert(result.data.Error);
                 }

@@ -11,7 +11,7 @@ const ProgMain = () => {
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        localStorage.removeItem("role", "uji");
+        localStorage.removeItem("role", "programer");
         anvigate('/')
       }
     })
@@ -101,23 +101,23 @@ const ProgMain = () => {
       {/* Navigation Bar - Mobile (Bottom) */}
       <ul className="lg:hidden fixed w-full bg-dark p-3 flex justify-around items-center overflow-hidden">
   <li className="">
-    <Link to="/kryepuntor" className="text-white">
+    <Link to="/programer" className="text-white">
       <i className="bi bi-speedometer2 text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kryepuntor/employee" className="text-white">
+    <Link to="/programer/employee" className="text-white">
       <i className="bi bi-people text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kryepuntor/klista" className="text-white">
+    <Link to="/programer/klista" className="text-white">
       <i className="bi bi-columns text-xl"></i>
     </Link>
   </li>
 
   <li className="">
-    <Link to="/kryepuntor/puntoret" className="text-white">
+    <Link to="/programer/puntoret" className="text-white">
       <i className="bi bi-person text-xl"></i>
     </Link>
   </li>

@@ -165,7 +165,7 @@ const SoundLista = () => {
 
       <div className="flex justify-between">
 
-        <Link to="/progpuntor/add_klista" className="btn btn-success ">
+        <Link to="/soundeffect/add_klista" className="btn btn-success ">
           Shto Listë
         </Link>
 
@@ -217,7 +217,7 @@ const SoundLista = () => {
                 <td>{e.detaje}</td>
                 <td>
                   <Link
-                    to={`/progpuntor/edit_klista/${e.id}`}
+                    to={`/soundeffect/edit_klista/${e.id}`}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -286,7 +286,7 @@ const SoundLista = () => {
                     <tr className="flex items-center text-wrap justify-between">
                       <th className="text-left max-w-[160px]">Action</th>
                       <td className="flex justify-end">
-                        <Link to={`/progpuntor/edit_klista/` + e.id} className="btn btn-info btn-sm me-2">
+                        <Link to={`/soundeffect/edit_klista/` + e.id} className="btn btn-info btn-sm me-2">
                           Edit
                         </Link>
                         <button

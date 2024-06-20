@@ -181,8 +181,8 @@ const ProgAddLista = () => {
                             id="inputSalary"
                             placeholder="Enter Salary"
                             autoComplete="off"
-                            value={employee1.data}  // Use employee1.data for the value
-                            onChange={handleChangeDate} // Update state on change
+                            value={employee1.data} 
+                            onChange={handleChangeDate} 
                         />
                     </div>
                     <div className="col-12">
