@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { GameDesignRouter } from "./Routes/GameDesignRoute.js";
 import { KontaRouter } from "./Routes/KontaRoute.js";
 import { ProgramerRouter } from "./Routes/ProgramerRoute.js";
+import { SoundEffectRoute } from "./Routes/SoundEffectRoute.js";
 
 const app = express() 
 app.use(cors({
@@ -21,6 +22,7 @@ app.use('/employee', EmployeeRouter)
 app.use('/krye', GameDesignRouter)
 app.use('/konta', KontaRouter)
 app.use('/prog', ProgramerRouter)
+app.use('/sound', SoundEffectRoute)
 app.use(express.static('Public'))
 
 const verifyUser = (req, res, next) => {

@@ -25,7 +25,7 @@ import KOret from './Components/GameDesign/KOret'
 import KPuntoret from './Components/GameDesign/KPuntoret'
 import KontaDashboard from './Components/Kontabilist/KontaDashboard'
 import KontaHome from './Components/Kontabilist/KontaHome'
-import Uji from './Components/Kontabilist/Uji'
+import GameDesign from './Components/Kontabilist/GameDesign'
 import DataPuntoret from './Components/Puntoret/DataPuntoret'
 import PuntorLogin from './Components/Puntoret/PuntorLogin'
 import { useEffect, useState } from 'react'
@@ -42,6 +42,17 @@ import ProgEditLista from './Components/Programer/ProgEditLista'
 import ProgAddLista from './Components/Programer/ProgAddLista'
 import ProgOret from './Components/Programer/ProgOret'
 import ProgPuntoret from './Components/Programer/ProgPuntoret'
+import Programers from './Components/Kontabilist/Programers'
+import SoundMain from './Components/SoundEffect/SoundMain'
+import SoundHome from './Components/SoundEffect/SoundHome'
+import SoundEmployee from './Components/SoundEffect/SoundEmployee'
+import SoundAddEmployee from './Components/SoundEffect/SoundAddEmployee'
+import SoundEditEmployee from './Components/SoundEffect/SoundEditEmployee'
+import SoundLista from './Components/SoundEffect/SoundLista'
+import SoundEditLista from './Components/SoundEffect/SoundEditLista'
+import SoundAddLista from './Components/SoundEffect/SoundAddLista'
+import SoundOret from './Components/SoundEffect/SoundOret'
+import SoundPuntoret from './Components/SoundEffect/SoundPuntoret'
 
 
 
@@ -106,11 +117,31 @@ function App() {
 
         </Route>
 
+
+
+        {/* Sound Effect */}
+        <Route path='/soundeffect' element={<PrivateRoute allowedRoles={['soundeffect']}>
+          <SoundMain />
+        </PrivateRoute>}>
+          <Route path='' element={<SoundHome />}></Route>
+          <Route path='/soundeffect/employee' element={<SoundEmployee />}></Route>
+          <Route path='/soundeffect/add_employee' element={<SoundAddEmployee />}></Route>
+          <Route path='/soundeffect/edit_employee/:id' element={<SoundEditEmployee />}></Route>
+          <Route path='/soundeffect/klista' element={<SoundLista />}></Route>
+          <Route path='/soundeffect/edit_klista/:id' element={<SoundEditLista />}></Route>
+          <Route path='/soundeffect/add_klista' element={<SoundAddLista />}></Route>
+          <Route path='/soundeffect/oret/:id' element={<SoundOret />}></Route>
+          <Route path='/soundeffect/puntoret' element={<SoundPuntoret />}></Route>
+
+
+        </Route>
+
         {/* KONTABILIST */}
 
         <Route path='/kontabilist' element={<KontaDashboard />}>
           <Route path='' element={<KontaHome />}></Route>
-          <Route path='/kontabilist/uji' element={<Uji />}></Route>
+          <Route path='/kontabilist/gamedesign' element={<GameDesign />}></Route>
+          <Route path='/kontabilist/programers' element={<Programers />}></Route>
 
         </Route>
 

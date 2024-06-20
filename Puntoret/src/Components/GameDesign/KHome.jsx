@@ -61,7 +61,7 @@ const KHome = () => {
 
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/employeeuji`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/employeegamedesign`);
         if (response.data.Status) {
           setEmployees(response.data.Result);
         } else {

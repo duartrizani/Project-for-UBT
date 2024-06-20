@@ -39,6 +39,12 @@ const PuntorLogin = ({ setWorkerId }) => {
               navigate('/programer')
               break;
 
+            case 'soundeffect':
+              localStorage.setItem("valid", true)
+              localStorage.setItem("role", "soundeffect");
+              navigate('/soundeffect')
+              break;
+
 
             case 'kontabilist':
               localStorage.setItem("valid", true)

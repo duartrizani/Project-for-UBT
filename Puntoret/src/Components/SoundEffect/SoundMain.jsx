@@ -3,15 +3,16 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
-const KontaDashboard = () => {
-  const anvigate = useNavigate()
+const SoundMain = () => {
+  const nanvigate = useNavigate()
   axios.defaults.withCredentials = true
   const handleLogout = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`)
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        anvigate('/')
+        localStorage.removeItem("role", "soundeffect");
+        nanvigate('/')
       }
     })
   }
@@ -25,7 +26,7 @@ const KontaDashboard = () => {
               className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
             >
               <span className="fs-5 fw-bolder d-none d-sm-inline">
-                UBT Project
+                UBT - soundeffect
               </span>
             </Link>
             <ul
@@ -34,44 +35,44 @@ const KontaDashboard = () => {
             >
               <li className="w-100">
                 <Link
-                  to="/kontabilist"
+                  to="/soundeffect"
                   className="nav-link text-white px-0 align-middle"
                 >
-                  <i className="fs-4  bi-speedometer2 ms-2"></i>
+                  <i className="fs-4 bi-speedometer2 ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">Dashboard</span>
                 </Link>
               </li>
               <li className="w-100">
                 <Link
-                  to="/kontabilist/gamedesign"
+                  to="/soundeffect/employee"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4  ms-2 bi bi-controller"></i>
+                  <i className="fs-4 bi-people ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">
-                    Game Design 
+                    Manage Employees
                   </span>
                 </Link>
               </li>
               <li className="w-100">
                 <Link
-                  to="/kontabilist/programers"
+                  to="/soundeffect/klista"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="bi bi-code-slash fs-4 ms-2"></i>
+                  <i className="bi bi-columns text-xl ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">
-                    Programers 
+                    Lista
                   </span>
                 </Link>
               </li>
 
               <li className="w-100">
                 <Link
-                  to="/kontabilist/soundeffect"
+                  to="/soundeffect/puntoret"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="bi bi-music-note-list fs-4  ms-2"></i>
+                  <i className="bi bi-person text-xl ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">
-                    Sound Effect 
+                    Rroga dhe Orët
                   </span>
                 </Link>
               </li>
@@ -81,7 +82,7 @@ const KontaDashboard = () => {
               <Link
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4  bi-power ms-2"></i>
+                  <i className="fs-4 bi-power ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">Logout</span>
                 </Link>
               </li>
@@ -90,7 +91,7 @@ const KontaDashboard = () => {
         </div>
 {/* Content */}
 <div className="flex-grow">
-        <div className="p-2 flex justify-center shadow fs-4  font-bold py-3">
+        <div className="p-2 flex justify-center shadow text-xl font-bold py-3">
           <h4>Sistemi i Puntorëve</h4>
         </div>
         <Outlet />
@@ -100,29 +101,29 @@ const KontaDashboard = () => {
       {/* Navigation Bar - Mobile (Bottom) */}
       <ul className="lg:hidden fixed w-full bg-dark p-3 flex justify-around items-center overflow-hidden">
   <li className="">
-    <Link to="/kontabilist" className="text-white">
-      <i className="bi bi-speedometer2 fs-4 "></i>
+    <Link to="/soundeffect" className="text-white">
+      <i className="bi bi-speedometer2 text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kontabilist/gamedesign" className="text-white">
-      <i className="bi bi-controller fs-4 "></i>
+    <Link to="/soundeffect/employee" className="text-white">
+      <i className="bi bi-people text-xl"></i>
     </Link>
   </li>
   <li className="">
-    <Link to="/kontabilist/programers" className="text-white">
-      <i className="bi bi-code-slash fs-4 "></i>
+    <Link to="/soundeffect/klista" className="text-white">
+      <i className="bi bi-columns text-xl"></i>
     </Link>
   </li>
 
   <li className="">
-    <Link to="/kontabilist/soundeffect" className="text-white">
-      <i className="bi bi-music-note-list fs-4 "></i>
+    <Link to="/soundeffect/puntoret" className="text-white">
+      <i className="bi bi-person text-xl"></i>
     </Link>
   </li>
   <li className="" onClick={handleLogout}>
     <a className="text-white cursor-pointer">
-      <i className="bi bi-power fs-4 "></i>
+      <i className="bi bi-power text-xl"></i>
     </a>
   </li>
 </ul>
@@ -131,4 +132,4 @@ const KontaDashboard = () => {
   );
 };
 
-export default KontaDashboard;
+export default SoundMain;

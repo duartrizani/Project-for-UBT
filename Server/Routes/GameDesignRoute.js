@@ -5,58 +5,6 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-// Kryepuntor Login
-router.post("/kryepuntor_login", async (req, res) => {
-  
-  try {
-    const trimmedName = req.body.name.replace(/\s+/g, '');
-    const sql = " SELECT * FROM kryepuntorët WHERE REPLACE(name, ' ', '') = ? AND password != '' AND password IS NOT NULL AND password = ? AND roles = ?"
-
-    const values = [trimmedName, req.body.password, req.body.roles];
-
-    // Use prepared statements to prevent SQL injection
-    const [result] = await con.query(sql, values);
-
-    if (result.length === 0) {
-      return res.status(401).json({ loginStatus: false, Error: "Wrong email or password!" });
-    }
-
-    const user = result[0];
-    const token = jwt.sign(
-      { role: "kryepuntor", name: trimmedName, id: user.id },
-      "jwt_secret_key",
-      { expiresIn: "1d" }
-    );
-
-    res.cookie("token", token);
-    return res.json({ loginStatus: true });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ loginStatus: false, Error: "Login failed" });
-  }
-});
-
-
-
-
-// Route to fetch an employee's salary history
-router.get('/salary_history/:worker_id', async (req, res) => {
-  const sql = "SELECT * FROM salary_history WHERE worker_id = ? ORDER BY effective_date DESC";
-  const { worker_id } = req.params;
-
-  try {
-    const [result] = await con.execute(sql, [worker_id]);
-    return res.json({ Status: true, Result: result });
-  } catch (err) {
-    console.error("Error fetching salary history:", err.message);
-    return res.status(500).json({ Status: false, Error: "Internal server error" });
-  }
-});
-
-
-
-
-
 
 
 
@@ -108,7 +56,7 @@ router.get("/employee", async (req, res) => {
 });
 
 
-router.get("/employeeuji", async (req, res) => {
+router.get("/employeegamedesign", async (req, res) => {
   try {
     const sql = "SELECT * FROM puntoretuji WHERE team = 'uji' ORDER BY name ASC";
     const [result] = await con.query(sql);

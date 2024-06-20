@@ -11,7 +11,7 @@ const router = express.Router()
 
 
 router.post('/add_employee', async (req, res) => {
-  const sql = "INSERT INTO programer (name, salary, role, worker_id) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO soundeffect (name, salary, role, worker_id) VALUES (?, ?, ?, ?)";
   const { name, salary, role, worker_id } = req.body;
 
   try {
@@ -23,9 +23,9 @@ router.post('/add_employee', async (req, res) => {
   }
 });
 
-router.post('/programer_data', async (req, res) => {
-  // Insert into programer_data table
-  const sql = "INSERT INTO programer_data (worker_id, name, data) VALUES (?, ?, ?)";
+router.post('/soundeffect_data', async (req, res) => {
+  // Insert into soundeffect_data table
+  const sql = "INSERT INTO soundeffect_data (worker_id, name, data) VALUES (?, ?, ?)";
   const { worker_id, name, data } = req.body; // Destructure data for cleaner code
 
   try {
@@ -45,7 +45,7 @@ router.post('/programer_data', async (req, res) => {
 // Get All Employees
 router.get("/employee", async (req, res) => {
   try {
-    const sql = "SELECT * FROM programer ORDER BY name ASC";
+    const sql = "SELECT * FROM soundeffect ORDER BY name ASC";
     const [result] = await con.query(sql);
 
     return res.json({ Status: true, Result: result });
@@ -58,7 +58,7 @@ router.get("/employee", async (req, res) => {
 
 router.get("/employeeprog", async (req, res) => {
   try {
-    const sql = "SELECT * FROM programer WHERE team = 'programer' ORDER BY name ASC";
+    const sql = "SELECT * FROM soundeffect WHERE team = 'soundeffect' ORDER BY name ASC";
     const [result] = await con.query(sql);
 
     return res.json({ Status: true, Result: result });
@@ -74,7 +74,7 @@ router.get("/employeeprog", async (req, res) => {
 router.get("/employee/:worker_id", async (req, res) => {
   try {
     const id = req.params.worker_id;
-    const sql = "SELECT * FROM programer WHERE worker_id = ?";
+    const sql = "SELECT * FROM soundeffect WHERE worker_id = ?";
     const [result] = await con.query(sql, [id]);
 
     return res.json({ Status: true, Result: result });
@@ -90,11 +90,11 @@ router.get("/employee/:worker_id", async (req, res) => {
 router.put("/edit_employee/:worker_id", async (req, res) => {
   const id = req.params.worker_id;
   const { name, salary, role } = req.body;
-  const sqlUpdateEmployee = "UPDATE programer SET name = ?, salary = ?, role = ? WHERE worker_id = ?";
+  const sqlUpdateEmployee = "UPDATE soundeffect SET name = ?, salary = ?, role = ? WHERE worker_id = ?";
   const sqlInsertHistory = "INSERT INTO salary_history (worker_id, salary, effective_date) VALUES (?, ?, NOW())";
 
   try {
-    // Update the employee's details in the programer table
+    // Update the employee's details in the soundeffect table
     await con.execute(sqlUpdateEmployee, [name, salary, role, id]);
 
     // Insert salary change into salary_history table
@@ -110,7 +110,7 @@ router.put("/edit_employee/:worker_id", async (req, res) => {
 
 router.delete("/delete_employee/:worker_id", async (req, res) => {
   const id = req.params.worker_id;
-  const sql = "DELETE FROM programer WHERE worker_id = ?";
+  const sql = "DELETE FROM soundeffect WHERE worker_id = ?";
 
   try {
     const [result] = await con.query(sql, [id]);
@@ -123,7 +123,7 @@ router.delete("/delete_employee/:worker_id", async (req, res) => {
 
 router.delete("/delete_worker/:worker_id", async (req, res) => {
   const id = req.params.worker_id; 
-  const sql = "DELETE FROM programer_data WHERE worker_id = ?";
+  const sql = "DELETE FROM soundeffect_data WHERE worker_id = ?";
 
   try {
     const [result] = await con.query(sql, [id]);
@@ -137,7 +137,7 @@ router.delete("/delete_worker/:worker_id", async (req, res) => {
 // Get Worker Data List (fixed)
 router.get('/klista', async (req, res) => {
   try {
-    const sql = "SELECT * FROM programer_data ORDER BY data ASC, name ASC";
+    const sql = "SELECT * FROM soundeffect_data ORDER BY data ASC, name ASC";
     const [result] = await con.query(sql); // Execute the query with prepared statement
 
     return res.json({ Status: true, Result: result });
@@ -149,7 +149,7 @@ router.get('/klista', async (req, res) => {
 
 router.get("/klista/:id", async (req, res) => {
   const id = req.params.id;
-  const sql = "SELECT * FROM programer_data WHERE id = ?";
+  const sql = "SELECT * FROM soundeffect_data WHERE id = ?";
 
   try {
     const [result] = await con.query(sql, [id]); // Use pool connection and prepared statement
@@ -161,7 +161,7 @@ router.get("/klista/:id", async (req, res) => {
 });
 router.put("/edit_klista/:id", (req, res) => {
   const id = req.params.id;
-  const sql = `UPDATE programer_data 
+  const sql = `UPDATE soundeffect_data 
       set name = ?, ora = ?
       Where id = ?`;
   const values = [req.body.name, req.body.ora];
@@ -171,9 +171,9 @@ router.put("/edit_klista/:id", (req, res) => {
   });
 });
 
-router.post('/programer_data', async (req, res) => {
-  // Insert into programer_data table
-  const sql = "INSERT INTO programer_data (worker_id, name, data, dita, ora) VALUES (?, ?, ?, ?, ?)";
+router.post('/soundeffect_data', async (req, res) => {
+  // Insert into soundeffect_data table
+  const sql = "INSERT INTO soundeffect_data (worker_id, name, data, dita, ora) VALUES (?, ?, ?, ?, ?)";
   const { worker_id, name, data, dita, ora } = req.body;
 
   try {
@@ -191,7 +191,7 @@ router.post('/programer_data', async (req, res) => {
 // Get Worker List (fixed)
 router.get('/addklista', async (req, res) => {
   try {
-    const sql = "SELECT worker_id, name FROM programer_data";
+    const sql = "SELECT worker_id, name FROM soundeffect_data";
     const [result] = await con.query(sql); // Execute the query with prepared statement
 
     return res.json({ Status: true, Result: result });
@@ -202,8 +202,8 @@ router.get('/addklista', async (req, res) => {
 });
 
 router.post('/addworkerklista', async (req, res) => {
-  // Insert into programer_data table
-  const sql = "INSERT INTO programer_data (worker_id, name, data, dita, ora) VALUES (?, ?, ?, ?, ?)";
+  // Insert into soundeffect_data table
+  const sql = "INSERT INTO soundeffect_data (worker_id, name, data, dita, ora) VALUES (?, ?, ?, ?, ?)";
   
   try {
       const selectedEmployeesData = req.body;
@@ -225,7 +225,7 @@ router.post('/addworkerklista', async (req, res) => {
 router.delete("/delete_klista/:id", async (req, res) => {
   const workerId = req.params.id;
 
-  const sql = "DELETE FROM programer_data WHERE id = ?";
+  const sql = "DELETE FROM soundeffect_data WHERE id = ?";
 
   try {
     const [result] = await con.query(sql, [workerId]);
@@ -238,7 +238,7 @@ router.delete("/delete_klista/:id", async (req, res) => {
 
 router.get('/senior_count', async (req, res) => {
     try {
-        const sql = "SELECT COUNT(*) AS worker_count FROM programer WHERE role = 'Senior'";
+        const sql = "SELECT COUNT(*) AS worker_count FROM soundeffect WHERE role = 'Senior'";
         const [result] = await con.query(sql);
         return res.json({ Status: true, Result: result[0] });
       } catch (err) {
@@ -249,7 +249,7 @@ router.get('/senior_count', async (req, res) => {
 
 router.get('/junior_count', async (req, res) => {
   try {
-    const sql = "SELECT COUNT(*) AS worker_count FROM programer WHERE role = 'Junior'";
+    const sql = "SELECT COUNT(*) AS worker_count FROM soundeffect WHERE role = 'Junior'";
     const [result] = await con.query(sql);
     return res.json({ Status: true, Result: result[0] });
   } catch (err) {
@@ -260,7 +260,7 @@ router.get('/junior_count', async (req, res) => {
 
 router.get('/midlevel_count', async (req, res) => {
   try {
-    const sql = "SELECT COUNT(*) AS worker_count FROM programer WHERE role = 'Mid-level'";
+    const sql = "SELECT COUNT(*) AS worker_count FROM soundeffect WHERE role = 'Mid-level'";
     const [result] = await con.query(sql);
     return res.json({ Status: true, Result: result[0] });
   } catch (err) {
@@ -274,7 +274,7 @@ router.get('/midlevel_count', async (req, res) => {
 router.get("/oret/:worker_id", async (req, res) => {
   try {
     const id = req.params.worker_id;
-    const sql = "SELECT * FROM programer_data WHERE worker_id = ? ORDER BY data ASC";
+    const sql = "SELECT * FROM soundeffect_data WHERE worker_id = ? ORDER BY data ASC";
     const [result] = await con.query(sql, [id]);
 
     return res.json({ Status: true, Result: result });
@@ -287,7 +287,7 @@ router.get("/oret/:worker_id", async (req, res) => {
 
 router.get("/workerdate", async (req, res) => {
   try {
-    const sql = "SELECT data, worker_id FROM programer_data ORDER BY data ASC";
+    const sql = "SELECT data, worker_id FROM soundeffect_data ORDER BY data ASC";
     const [result] = await con.query(sql);
 
     return res.json({ Status: true, Result: result });
@@ -299,7 +299,7 @@ router.get("/workerdate", async (req, res) => {
 
 router.delete("/delete_workers", async (req, res) => {
   const idsToDelete = req.body.idsToDelete; // Array of IDs to delete
-  const sql = "DELETE FROM programer_data WHERE id IN (?)";
+  const sql = "DELETE FROM soundeffect_data WHERE id IN (?)";
 
   try {
     const [result] = await con.query(sql, [idsToDelete]);
@@ -323,4 +323,4 @@ router.get("/logout", (req, res) => {
   return res.json({ Status: true });
 });
 
-export { router as ProgramerRouter };
+export { router as SoundEffectRoute };

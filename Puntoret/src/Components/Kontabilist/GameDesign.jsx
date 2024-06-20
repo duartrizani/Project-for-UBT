@@ -5,7 +5,7 @@ import { CSVLink } from 'react-csv';
 import ExcelJS from 'exceljs'; // Import ExcelJS library
 
 
-const Uji = () => {
+const GameDesign = () => {
     const [employee, setEmployee] = useState([]);
     const [worker, setWorker] = useState([]);
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -288,4 +288,4 @@ const exportToExcel = () => {
     );
 };
 
-export default Uji;
+export default GameDesign;

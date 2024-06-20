@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const ProgHome = () => {
+const SoundHome = () => {
   const [workerCount, setWorkerCount] = useState(0);
   const [puntorCount, setPuntorCount] = useState(0);
   const [mjeshterCount, setMjeshterCount] = useState(0);
@@ -10,7 +10,7 @@ const ProgHome = () => {
   useEffect(() => {
     const fetchWorkerCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/senior_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/senior_count`);
         if (response.data.Status) {
           setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -27,7 +27,7 @@ const ProgHome = () => {
 
     const fetchPuntorCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/junior_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/junior_count`);
         if (response.data.Status) {
           setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -44,7 +44,7 @@ const ProgHome = () => {
 
     const fetchMjeshterCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/midlevel_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/midlevel_count`);
         if (response.data.Status) {
           setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -61,7 +61,7 @@ const ProgHome = () => {
 
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/employeeprog`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/sound/employeeprog`);
         if (response.data.Status) {
           setEmployees(response.data.Result);
         } else {
@@ -154,4 +154,4 @@ const ProgHome = () => {
   );
 };
 
-export default ProgHome;
+export default SoundHome;
