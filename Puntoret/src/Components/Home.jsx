@@ -1,123 +1,139 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const [adminTotal, setAdminTotal] = useState(0)
-  const [employeeTotal, setemployeeTotal] = useState(0)
-  const [salaryTotal, setSalaryTotal] = useState(0)
-  const [admins, setAdmins] = useState([])
+  const [workerCount, setWorkerCount] = useState(0);
+  const [puntorCount, setPuntorCount] = useState(0);
+  const [mjeshterCount, setMjeshterCount] = useState(0);
+
+  const navigate = useNavigate()
+
 
   useEffect(() => {
-    adminCount();
-    employeeCount();
-    salaryCount();
-    AdminRecords();
-  }, [])
+    const fetchWorkerCount = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntoret_count`);
+        if (response.data.Status) {
+          setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+        } else {
+          console.error("Error fetching worker count:", response.data.Error);
+          // Handle error (e.g., display an error message to the user)
+        }
+      } catch (error) {
+        console.error("Error fetching worker count:", error);
+        // Handle error (e.g., display an error message to the user)
+      }
+    };
 
-  const AdminRecords = () => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/admin_records`)
-    .then(result => {
-      if(result.data.Status) {
-        setAdmins(result.data.Result)
-      } else {
-         alert(result.data.Error)
+    fetchWorkerCount();
+
+
+    const fetchPuntorCount = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntor_count`);
+        if (response.data.Status) {
+          setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+        } else {
+          console.error("Error fetching worker count:", response.data.Error);
+          // Handle error (e.g., display an error message to the user)
+        }
+      } catch (error) {
+        console.error("Error fetching worker count:", error);
+        // Handle error (e.g., display an error message to the user)
       }
-    })
-  }
-  const adminCount = () => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/admin_count`)
-    .then(result => {
-      if(result.data.Status) {
-        setAdminTotal(result.data.Result[0].admin)
+    };
+
+    fetchPuntorCount();
+
+
+    const fetchMjeshterCount = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujimjeshter_count`);
+        if (response.data.Status) {
+          setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+        } else {
+          console.error("Error fetching worker count:", response.data.Error);
+          // Handle error (e.g., display an error message to the user)
+        }
+      } catch (error) {
+        console.error("Error fetching worker count:", error);
+        // Handle error (e.g., display an error message to the user)
       }
-    })
-  }
-  const employeeCount = () => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/employee_count`)
-    .then(result => {
-      if(result.data.Status) {
-        setemployeeTotal(result.data.Result[0].employee)
-      }
-    })
-  }
-  const salaryCount = () => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/salary_count`)
-    .then(result => {
-      if(result.data.Status) {
-        setSalaryTotal(result.data.Result[0].salaryOFEmp)
-      } else {
-        alert(result.data.Error)
-      }
-    })
-  }
+    };
+
+    fetchMjeshterCount();
+
+  }, []);
+
+
+
   return (
     <div>
-      <div className='p-3 d-flex justify-content-around mt-3'>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Admin</h4>
-          </div>
-          <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{adminTotal}</h5>
-          </div>
-        </div>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Employee</h4>
-          </div>
-          <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{employeeTotal}</h5>
-          </div>
-        </div>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Salary</h4>
-          </div>
-          <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{salaryTotal}€</h5>
+      <div className='p-3 d-flex justify-content-around mt-3 w-full max-md:flex-col'>
+
+
+
+
+        <div class="col-md-4 md:pr-5">
+          <div class="card card-1 h-[200px] justify-center"
+          onClick={() => navigate("/kontabilist/gamedesign")}>
+            <div>
+              <div className='text-center pb-1 '>
+                <h4>Game Design</h4>
+              </div>
+              <hr />
+              <div className='d-flex justify-content-between'>
+                <h5>Totali:</h5>
+                <h5>{workerCount}</h5>
+              </div>
+            </div>
           </div>
         </div>
+
+
+        <div class="col-md-4 md:pr-5">
+          <div class="card card-2 h-[200px] justify-center "
+          onClick={() => navigate("/kontabilist/programers")}>
+            <div>
+              <div className='text-center pb-1'>
+                <h4>Programers</h4>
+              </div>
+              <hr />
+              <div className='d-flex justify-content-between'>
+                <h5>Totali:</h5>
+                <h5>{mjeshterCount}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 " >
+          <div class="card card-3 h-[200px] justify-center"
+          onClick={() => navigate("/kontabilist/soundeffect")}>
+            <div>
+              <div className='text-center pb-1'>
+                <h4>Sound Effect</h4>
+              </div>
+              <hr />
+              <div className='d-flex justify-content-between'>
+                <h5>Totali:</h5>
+                <h5>{puntorCount}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+
+
       </div>
-      <div className='mt-4 px-5 pt-3'>
-        <h3>List of Admins</h3>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Roles</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              admins.map((a,i)=> (
-                <tr key={i}>
-                  <td>{a.email}</td>
-                  <td>{a.roles}</td>
-                  <td>
-                  <button
-                    className="btn btn-info btn-sm me-2">
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-warning btn-sm" >
-                    Delete
-                  </button>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
+
     </div>
   )
 }
+
 
 export default Home

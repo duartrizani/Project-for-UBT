@@ -1,89 +1,148 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
 const Dashboard = () => {
-  const anvigate = useNavigate()
-  axios.defaults.withCredentials = true
+  const navigate = useNavigate();
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  axios.defaults.withCredentials = true;
+
   const handleLogout = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`)
-    .then(result => {
-      if(result.data.Status) { 
-        localStorage.removeItem("valid")
-        localStorage.removeItem("role", "admin");
-        anvigate('/')
-      }
-    })
-  }
+      .then(result => {
+        if (result.data.Status) {
+          localStorage.removeItem("valid");
+          navigate('/');
+        }
+      });
+  };
+
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
   return (
-    <div className="container-fluid">
-      <div className="row flex-nowrap">
-        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-          <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <Link
-              to="/dashboard"
-              className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
-            >
-              <span className="fs-5 fw-bolder d-none d-sm-inline">
-                UBT Project
-              </span>
-            </Link>
-            <ul
-              className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-              id="menu"
-            >
-              <li className="w-100">
-                <Link
-                  to="/dashboard"
-                  className="nav-link text-white px-0 align-middle"
-                >
-                  <i className="fs-4 bi-speedometer2 ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Dashboard</span>
-                </Link>
-              </li>
-              <li className="w-100">
-                <Link
-                  to="/dashboard/employee"
-                  className="nav-link px-0 align-middle text-white"
-                >
-                  <i className="fs-4 bi-people ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">
-                    Manage Employees
-                  </span>
-                </Link>
-              </li>
-              <li className="w-100">
-                <Link
-                  to="/dashboard/puntoretuji"
-                  className="nav-link px-0 align-middle text-white"
-                >
-                  <i className="fs-4 bi-people ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">
-                    Puntorët e Ujit
-                  </span>
-                </Link>
-              </li>
-              
-              
-              <li className="w-100" onClick={handleLogout}>
+    <div className="flex">
+      <div className="col-auto col-md-3 col-xl-2 bg-dark text-white hidden lg:block">
+        <div className="flex flex-col items-center lg:items-start p-4 min-h-screen">
+          <Link
+            to="/dashboard"
+            className="flex items-center mb-6 text-white text-decoration-none"
+          >
+            <span className="text-2xl font-bold">UBT Project</span>
+          </Link>
+          <ul className="nav flex-col w-full">
+            <li className="w-full">
               <Link
-                  className="nav-link px-0 align-middle text-white"
-                >
-                  <i className="fs-4 bi-power ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Logout</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="col p-0 m-0">
-            <div className="p-2 d-flex justify-content-center shadow">
-                <h4>Emoployee Management System</h4>
-            </div>
-            <Outlet />
+                to="/dashboard"
+                className="flex items-center py-2 hover:bg-gray-700 transition duration-200"
+              >
+                <i className="bi bi-speedometer2 text-xl"></i>
+                <span className="ml-4 hidden lg:inline">Dashboard</span>
+              </Link>
+            </li>
+            <li className="w-full">
+              <div
+                className="flex items-center py-2 hover:bg-gray-700 transition duration-200 cursor-pointer"
+                onClick={() => toggleDropdown("gamedesign")}
+              >
+                <i className="bi bi-controller text-xl"></i>
+                <span className="ml-4 hidden lg:inline">Game Design</span>
+                <i className={`bi ml-auto ${openDropdown === "gamedesign" ? "bi-chevron-up" : "bi-chevron-down"}`}></i>
+              </div>
+              <ul className={`flex flex-col ml-8 overflow-hidden transition-all duration-300 ${openDropdown === "gamedesign" ? "max-h-40" : "max-h-0"}`}>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/gamedesign/leveldesign">Level Design</Link>
+                </li>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/gamedesign/characterdesign">Character Design</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="w-full">
+              <div
+                className="flex items-center py-2 hover:bg-gray-700 transition duration-200 cursor-pointer"
+                onClick={() => toggleDropdown("programers")}
+              >
+                <i className="bi bi-code-slash text-xl"></i>
+                <span className="ml-4 hidden lg:inline">Programers</span>
+                <i className={`bi ml-auto ${openDropdown === "programers" ? "bi-chevron-up" : "bi-chevron-down"}`}></i>
+              </div>
+              <ul className={`flex flex-col ml-8 overflow-hidden transition-all duration-300 ${openDropdown === "programers" ? "max-h-40" : "max-h-0"}`}>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/programers/frontend">Frontend</Link>
+                </li>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/programers/backend">Backend</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="w-full">
+              <div
+                className="flex items-center py-2 hover:bg-gray-700 transition duration-200 cursor-pointer"
+                onClick={() => toggleDropdown("soundeffect")}
+              >
+                <i className="bi bi-music-note-list text-xl"></i>
+                <span className="ml-4 hidden lg:inline">Sound Effect</span>
+                <i className={`bi ml-auto ${openDropdown === "soundeffect" ? "bi-chevron-up" : "bi-chevron-down"}`}></i>
+              </div>
+              <ul className={`flex flex-col ml-8 overflow-hidden transition-all duration-300 ${openDropdown === "soundeffect" ? "max-h-40" : "max-h-0"}`}>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/soundeffect/music">Music</Link>
+                </li>
+                <li className="py-2 px-4 hover:bg-gray-700 transition duration-200">
+                  <Link to="/kontabilist/soundeffect/effects">Effects</Link>
+                </li>
+              </ul>
+            </li>
+            <li className="w-full" onClick={handleLogout}>
+              <div className="flex items-center py-2 hover:bg-gray-700 transition duration-200 cursor-pointer">
+                <i className="bi bi-power text-xl"></i>
+                <span className="ml-4 hidden lg:inline">Logout</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
+
+      {/* Content */}
+      <div className="flex-grow">
+        <div className="p-2 flex justify-center shadow text-xl font-bold py-3 bg-white">
+          <h4>Sistemi i Puntorëve</h4>
+        </div>
+        <Outlet />
+      </div>
+
+      {/* Navigation Bar - Mobile (Bottom) */}
+      <ul className="lg:hidden fixed bottom-0 w-full bg-dark text-white p-3 flex justify-around items-center">
+        <li>
+          <Link to="/kontabilist" className="text-white">
+            <i className="bi bi-speedometer2 text-xl"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/kontabilist/gamedesign" className="text-white">
+            <i className="bi bi-controller text-xl"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/kontabilist/programers" className="text-white">
+            <i className="bi bi-code-slash text-xl"></i>
+          </Link>
+        </li>
+        <li>
+          <Link to="/kontabilist/soundeffect" className="text-white">
+            <i className="bi bi-music-note-list text-xl"></i>
+          </Link>
+        </li>
+        <li onClick={handleLogout}>
+          <a className="text-white cursor-pointer">
+            <i className="bi bi-power text-xl"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 };

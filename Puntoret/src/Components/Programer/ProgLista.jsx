@@ -196,28 +196,26 @@ const Proglista = () => {
           <thead className="text-center">
             <tr>
               <th>ID</th>
-              <th>Worker ID</th>
               <th>Emri</th>
               <th>DATA</th>
               <th>DITA</th>
               <th>ORËT</th>
-              <th>Detaje</th>
-              <th>Action</th>
+              <th>ACTION</th>
+              <th>SELECT</th>
             </tr>
           </thead>
           <tbody className="text-center">
             {sortedFilteredWorker.map((e) => (
               <tr key={e.id}>
                 <td>{e.id}</td>
-                <td>{e.worker_id}</td>
                 <td>{e.name}</td>
                 <td>{new Date(selectedDate).toLocaleDateString('en-UK')}</td>
                 <td>{e.dita}</td>
                 <td>{e.ora}</td>
-                <td>{e.detaje}</td>
+
                 <td>
                   <Link
-                    to={`/programer/edit_klista/${e.id}`}
+                    to={`/gamedesign/edit_klista/${e.id}`}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -228,12 +226,15 @@ const Proglista = () => {
                   >
                     Delete
                   </button>
+                  
+                </td>
+                <td className="w-10">
                   <input
                     type="checkbox"
                     checked={selectedEmployeeIds.includes(e.id)}
                     onChange={() => handleEmployeeSelect(e)}
                   />
-                </td>
+                  </td>
               </tr>
             ))}
           </tbody>

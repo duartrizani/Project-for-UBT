@@ -84,7 +84,7 @@ function App() {
         <Route path='/contactus' element={<ContactForm />}></Route>
 
         {/* UJI */}
-        <Route path='/gamedesign' element={<PrivateRoute allowedRoles={['gamedesign']}>
+        <Route path='/gamedesign' element={<PrivateRoute allowedRoles={['gamedesign','admin']}>
           <Kryepuntor />
         </PrivateRoute>}>
           <Route path='' element={<KHome />}></Route>
@@ -102,7 +102,7 @@ function App() {
 
 
         {/* Programer */}
-        <Route path='/programer' element={<PrivateRoute allowedRoles={['programer']}>
+        <Route path='/programer' element={<PrivateRoute allowedRoles={['programer','admin']}>
           <ProgMain />
         </PrivateRoute>}>
           <Route path='' element={<ProgHome />}></Route>
@@ -121,7 +121,7 @@ function App() {
 
 
         {/* Sound Effect */}
-        <Route path='/soundeffect' element={<PrivateRoute allowedRoles={['soundeffect']}>
+        <Route path='/soundeffect' element={<PrivateRoute allowedRoles={['soundeffect','admin']}>
           <SoundMain />
         </PrivateRoute>}>
           <Route path='' element={<SoundHome />}></Route>
@@ -158,11 +158,6 @@ function App() {
 
 
         {/* Dashboard ADMIN */}
-
-        <Route path='/addadmin' element={<PrivateRoute allowedRoles={['admin']}>
-          <AddAdmin />
-        </PrivateRoute>}>
-        </Route>
 
         <Route path='/dashboard' element={
           <PrivateRoute allowedRoles={['admin']} >
