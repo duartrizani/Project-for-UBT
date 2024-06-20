@@ -1,4 +1,14 @@
 
+
+ul li :hover {
+    background-color: gray;
+}
+
+.liclass :hover {
+  background-color: transparent;
+}
+
+
 .custom-select{
     background: #374151 url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='%23ffffff' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") right .75rem center/8px 10px no-repeat!important;
    }

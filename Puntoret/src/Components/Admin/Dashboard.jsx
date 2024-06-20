@@ -34,8 +34,8 @@ const Dashboard = () => {
           >
             <span className="text-2xl font-bold">UBT Project</span>
           </Link>
-          <ul className="nav flex-col w-full">
-            <li className="w-full">
+          <ul className="nav liclass flex-col w-full ">
+            <li className="w-full liclass">
               <Link
                 to="/dashboard"
                 className="flex items-center py-2 hover:bg-gray-700 transition duration-200"
