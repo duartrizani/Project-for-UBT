@@ -76,7 +76,7 @@ const ProgAddLista = () => {
         axios.post(`${import.meta.env.VITE_API_URL}/prog/addworkerklista`, selectedEmployeesData)
             .then(result => {
                 if (result.data.Status) {
-                    navigate('/progpuntor/klista');
+                    navigate('/programer/klista');
                 } else {
                     alert(result.data.Error);
                 }

@@ -39,12 +39,12 @@ const ProgEditLista = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        navigate('/progpuntor/klista')
+        navigate('/programer/klista')
 
         axios.put(`${import.meta.env.VITE_API_URL}/prog/edit_klista/` + id, employee)
             .then(result => {
                 if (result.data.Status) {
-                    navigate('/progpuntor/klista')
+                    navigate('/programer/klista')
                     window.location.reload()
                 } else {
                     alert(result.data.Error)

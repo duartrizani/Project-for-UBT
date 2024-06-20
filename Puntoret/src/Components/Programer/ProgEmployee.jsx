@@ -6,6 +6,7 @@ const ProgEmployee = () => {
   const [employee, setEmployee] = useState([]);
   const navigate = useNavigate()
   const [dropdownState, setDropdownState] = useState({ isOpen: false, activeDropdown: null });
+  const [nextId, setNextId] = useState(1);
 
 
 
@@ -48,6 +49,7 @@ const ProgEmployee = () => {
   };
 
 
+
   return (
     <div className="lg:px-5 mt-3 pl-2">
       <div className="d-flex justify-content-center max-lg:py-5 text-lg font-bold">
@@ -60,7 +62,7 @@ const ProgEmployee = () => {
         <table className="table">
           <thead className="text-center">
             <tr>
-              <th>ID</th>
+              <th>Nr</th>
               <th>Emri</th>
               <th>Paga /orë (NETO)</th>
               <th>Paga /orë (BRUTO)</th>
@@ -69,22 +71,22 @@ const ProgEmployee = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {employee.map((e) => (
+            {employee.map((e, index) => (
               <tr>
-                <td>{e.worker_id}</td>
+                <td>{index + 1}</td>
                 <td>{e.name}</td>
                 <td>{e.salary}€</td>
                 <td>{Number((e.salary * 1.125).toFixed(2))}€</td>
                 <td>{e.role}</td>
                 <td>
                   <Link
-                    to={`/progpuntor/oret/` + e.worker_id}
+                    to={`/programer/oret/` + e.worker_id}
                     className="btn btn-primary btn-sm me-2"
                   >
                     Orët
                   </Link>
                   <Link
-                    to={`/progpuntor/edit_employee/` + e.worker_id}
+                    to={`/programer/edit_employee/` + e.worker_id}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -140,10 +142,10 @@ const ProgEmployee = () => {
               <tr className="flex items-center text-wrap justify-between">
                 <th className="text-left max-w-[160px]">Action</th>
                 <td className="flex justify-end">
-                  <Link to={`/progpuntor/oret/` + e.worker_id} className="btn btn-primary btn-sm me-2">
+                  <Link to={`/programer/oret/` + e.worker_id} className="btn btn-primary btn-sm me-2">
                     Orët
                   </Link>
-                  <Link to={`/progpuntor/edit_employee/` + e.worker_id} className="btn btn-info btn-sm me-2">
+                  <Link to={`/programer/edit_employee/` + e.worker_id} className="btn btn-info btn-sm me-2">
                     Edit
                   </Link>
                   <button className="btn btn-warning btn-sm" onClick={() => handleDelete(e.worker_id)}>

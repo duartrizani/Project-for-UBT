@@ -26,7 +26,7 @@ const ProgMain = () => {
               className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
             >
               <span className="fs-5 fw-bolder d-none d-sm-inline">
-                UBT Project
+                UBT - Programers
               </span>
             </Link>
             <ul
@@ -35,7 +35,7 @@ const ProgMain = () => {
             >
               <li className="w-100">
                 <Link
-                  to="/kryepuntor"
+                  to="/programer"
                   className="nav-link text-white px-0 align-middle"
                 >
                   <i className="fs-4 bi-speedometer2 ms-2"></i>
@@ -44,7 +44,7 @@ const ProgMain = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/employee"
+                  to="/programer/employee"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi-people ms-2"></i>
@@ -55,7 +55,7 @@ const ProgMain = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/klista"
+                  to="/programer/klista"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="bi bi-columns text-xl ms-2"></i>
@@ -67,7 +67,7 @@ const ProgMain = () => {
 
               <li className="w-100">
                 <Link
-                  to="/kryepuntor/puntoret"
+                  to="/programer/puntoret"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="bi bi-person text-xl ms-2"></i>

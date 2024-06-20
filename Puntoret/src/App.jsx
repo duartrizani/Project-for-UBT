@@ -90,7 +90,7 @@ function App() {
 
 
         {/* Programer */}
-        <Route path='/programer' element={<PrivateRoute allowedRoles={['Programer']}>
+        <Route path='/programer' element={<PrivateRoute allowedRoles={['programer']}>
           <ProgMain />
         </PrivateRoute>}>
           <Route path='' element={<ProgHome />}></Route>

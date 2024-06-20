@@ -11,35 +11,69 @@ function DataPuntoret({ initialWorkerId }) {
     const navigate = useNavigate()
   
     useEffect(() => {
-      const fetchEmployees = async () => {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/krye/oret/${workerId}` // Assuming no month filter in API call
-        );
+      const fetchEmployeeData = async () => {
+        try {
+          let response;
   
-        if (response.data.Status) {
-          setEmployee(response.data.Result);
-        } else {
-          alert(response.data.Error);
+          // Try fetching employee data
+          response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/oret/${workerId}`);
+          if (response.data.Status && response.data.Result.length > 0) {
+            setEmployee(response.data.Result);
+          } else {
+            // If no data
+            response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/oret/${workerId}`);
+            if (response.data.Status && response.data.Result.length > 0) {
+              setEmployee(response.data.Result);
+            } else {
+              setError("No employee data found.");
+            }
+          }
+        } catch (error) {
+          setError("Error fetching employee data.");
         }
       };
-
-      axios.get(`${import.meta.env.VITE_API_URL}/krye/employee/`+workerId)
-        .then(result => {
-          setWorker({
-                name: result.data.Result[0].name,
-                salary: result.data.Result[0].salary,
-                role: result.data.Result[0].role,
-            })
-        }).catch(err => console.log(err))
   
-      fetchEmployees();
-    }, [workerId]); // Fetch data on id change only 
+      const fetchWorkerData = async () => {
+        try {
+          let response;
+  
+          // Try fetching worker data
+          response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/employee/${workerId}`);
+          if (response.data.Status && response.data.Result.length > 0) {
+            const workerData = response.data.Result[0];
+            setWorker({
+              name: workerData.name,
+              salary: workerData.salary,
+              role: workerData.role,
+            });
+          } else {
+            // If no data
+            response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/employee/${workerId}`);
+            if (response.data.Status && response.data.Result.length > 0) {
+              const workerData = response.data.Result[0];
+              setWorker({
+                name: workerData.name,
+                salary: workerData.salary,
+                role: workerData.role,
+              });
+            } else {
+              setError("No worker data found.");
+            }
+          }
+        } catch (error) {
+          setError("Error fetching worker data.");
+        }
+      };
+  
+      fetchEmployeeData();
+      fetchWorkerData();
+    }, [workerId]);
   
     const handleMonthChange = (event) => {
       setSelectedMonth(event.target.value);
     };
   
-    // Filter employees based on selected month within the component
+    // Filter employees based on selected month
     const filteredEmployees = employee.filter((worker) => new Date(worker.data).toISOString().slice(0, 7) === selectedMonth);
   
     const monthNamesAlbanian = {
@@ -124,7 +158,7 @@ function DataPuntoret({ initialWorkerId }) {
           <table className="table">
             <thead className="text-center">
               <tr>
-                <th>Emri</th>
+                <th>Nr</th>
                 <th>Data</th>
                 <th>Dita</th>
                 <th>Ora</th>
@@ -132,9 +166,9 @@ function DataPuntoret({ initialWorkerId }) {
             </thead>
             <tbody className="text-center">
               {filteredEmployees.length > 0 ? ( // Check if filtered data exists
-                filteredEmployees.map((e) => (
+                filteredEmployees.map((e, index) => (
                   <tr>
-                    <td>{e.name}</td>
+                    <td>{index + 1}</td>
                     <td>{new Date(e.data).toLocaleDateString('en-UK')}</td>
                     <td>{e.dita}</td>
                     <td>{e.ora}</td>

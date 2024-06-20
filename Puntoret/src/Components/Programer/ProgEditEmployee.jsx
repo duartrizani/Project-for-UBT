@@ -7,7 +7,7 @@ const ProgEditEmployee = () => {
   const [employee, setEmployee] = useState({
     name: "",
     salary: "",
-    role: "Mjeshtër",
+    role: "Senior",
   });
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const ProgEditEmployee = () => {
     axios.put(`${import.meta.env.VITE_API_URL}/prog/edit_employee/` + id, employee)
       .then(result => {
         if (result.data.Status) {
-          navigate('/progpuntor/employee').reload();
+          navigate('/programer/employee').reload();
         } else {
           alert(result.data.Error);
         }
@@ -91,8 +91,9 @@ const ProgEditEmployee = () => {
             <select name="category" id="category" className="form-select"
                 onChange={(e) => setEmployee({...employee, role: e.target.value})}>
                   <option value="" selected disabled>Zgjidh</option>;
-                  <option value="Mjeshtër">Mjeshtër</option>;
-                  <option value="Punëtor">Punëtor</option>;
+                  <option value="Senior">Senior</option>;
+                  <option value="Mid-level">Mid-level</option>;
+                  <option value="Junior">Junior</option>;
             </select>
           </div>
           
