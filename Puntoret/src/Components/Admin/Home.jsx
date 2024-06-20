@@ -77,7 +77,7 @@ const Home = () => {
 
         <div class="col-md-4 md:pr-5">
           <div class="card card-1 h-[200px] justify-center"
-          onClick={() => navigate("/kontabilist/gamedesign")}>
+          onClick={() => navigate("/dashboard/gamedesign/employee")}>
             <div>
               <div className='text-center pb-1 '>
                 <h4>Game Design</h4>
@@ -94,7 +94,7 @@ const Home = () => {
 
         <div class="col-md-4 md:pr-5">
           <div class="card card-2 h-[200px] justify-center "
-          onClick={() => navigate("/kontabilist/programers")}>
+          onClick={() => navigate("/dashboard/programers/employee")}>
             <div>
               <div className='text-center pb-1'>
                 <h4>Programers</h4>
@@ -111,7 +111,7 @@ const Home = () => {
 
         <div class="col-md-4 " >
           <div class="card card-3 h-[200px] justify-center"
-          onClick={() => navigate("/kontabilist/soundeffect")}>
+          onClick={() => navigate("/dashboard/soundeffect/employee")}>
             <div>
               <div className='text-center pb-1'>
                 <h4>Sound Effect</h4>

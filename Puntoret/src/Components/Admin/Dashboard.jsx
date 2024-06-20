@@ -57,7 +57,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200 ">
                   <Link
-                    to="/gamedesign/employee"
+                    to="/dashboard/gamedesign/employee"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="text-base bi-people ms-2"></i>
@@ -69,7 +69,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200">
                   <Link
-                    to="/gamedesign/klista"
+                    to="/dashboard/gamedesign/klista"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-columns text-base ms-2"></i>
@@ -81,7 +81,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200 mb-2">
                   <Link
-                    to="/gamedesign/puntoret"
+                    to="/dashboard/gamedesign/puntoret"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-person text-base ms-2"></i>
@@ -104,7 +104,7 @@ const Dashboard = () => {
               <ul className={`flex flex-col ml-1 overflow-hidden transition-all duration-300 ${openDropdown === "programers" ? "max-h-40" : "max-h-0"}`}>
               <li className="w-100 hover:bg-gray-700 transition duration-200 ">
                   <Link
-                    to="/gamedesign/employee"
+                    to="/dashboard/programer/employee"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="text-base bi-people ms-2"></i>
@@ -116,7 +116,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200">
                   <Link
-                    to="/gamedesign/klista"
+                    to="/dashboard/programer/klista"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-columns text-base ms-2"></i>
@@ -128,7 +128,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200 mb-2">
                   <Link
-                    to="/gamedesign/puntoret"
+                    to="/dashboard/programer/puntoret"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-person text-base ms-2"></i>
@@ -151,7 +151,7 @@ const Dashboard = () => {
               <ul className={`flex flex-col ml-1 overflow-hidden transition-all duration-300 ${openDropdown === "soundeffect" ? "max-h-40" : "max-h-0"}`}>
               <li className="w-100 hover:bg-gray-700 transition duration-200 ">
                   <Link
-                    to="/gamedesign/employee"
+                    to="/dashboard/soundeffect/employee"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="text-base bi-people ms-2"></i>
@@ -163,7 +163,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200">
                   <Link
-                    to="/gamedesign/klista"
+                    to="/dashboard/soundeffect/klista"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-columns text-base ms-2"></i>
@@ -175,7 +175,7 @@ const Dashboard = () => {
 
                 <li className="w-100 hover:bg-gray-700 transition duration-200 mb-2">
                   <Link
-                    to="/gamedesign/puntoret"
+                    to="/dashboard/soundeffect/puntoret"
                     className="nav-link px-0 align-middle text-white"
                   >
                     <i className="bi bi-person text-base ms-2"></i>
@@ -207,22 +207,22 @@ const Dashboard = () => {
       {/* Navigation Bar - Mobile (Bottom) */}
       <ul className="lg:hidden fixed bottom-0 w-full bg-dark text-white p-3 flex justify-around items-center">
         <li>
-          <Link to="/kontabilist" className="text-white">
+          <Link to="/dashboard" className="text-white">
             <i className="bi bi-speedometer2 text-xl"></i>
           </Link>
         </li>
         <li>
-          <Link to="/kontabilist/gamedesign" className="text-white">
+          <Link to="/dashboard/gamedesign" className="text-white">
             <i className="bi bi-controller text-xl"></i>
           </Link>
         </li>
         <li>
-          <Link to="/kontabilist/programers" className="text-white">
+          <Link to="/dashboard/programers" className="text-white">
             <i className="bi bi-code-slash text-xl"></i>
           </Link>
         </li>
         <li>
-          <Link to="/kontabilist/soundeffect" className="text-white">
+          <Link to="/dashboard/soundeffect" className="text-white">
             <i className="bi bi-music-note-list text-xl"></i>
           </Link>
         </li>

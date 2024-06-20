@@ -69,9 +69,9 @@ const AKEmployee = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {employee.map((e) => (
+            {employee.map((e, index) => (
               <tr>
-                <td>{e.worker_id}</td>
+                <td>{index + 1}</td>
                 <td>{e.name}</td>
                 <td>{e.salary}€</td>
                 <td>{Number((e.salary * 1.125).toFixed(2))}€</td>
