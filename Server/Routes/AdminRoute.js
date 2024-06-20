@@ -183,7 +183,7 @@ router.delete('/delete_employee/:id', (req, res) => {
   
   router.get('/programer_count', async (req, res) => {
     try {
-      const sql = "select count(id) as admin from programer";
+      const sql = "select count(id) from programer";
       const [result] = await con.query(sql);
       return res.json({ Status: true, Result: result[0].admin }); // Assuming the count is in the first element
     } catch (err) {
