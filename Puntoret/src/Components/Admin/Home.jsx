@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const [workerCount, setWorkerCount] = useState(0);
-  const [puntorCount, setPuntorCount] = useState(0);
-  const [mjeshterCount, setMjeshterCount] = useState(0);
+  const [gameDesignCount, setGameDesignCount] = useState(0);
+  const [programerCount, setProgramerCount] = useState(0);
+  const [soundEffectCount, setSoundEffectCount] = useState(0);
 
   const navigate = useNavigate()
 
 
   useEffect(() => {
-    const fetchWorkerCount = async () => {
+    const fetchGameDesignCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntoret_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/gamedesign_count`);
         if (response.data.Status) {
-          setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setGameDesignCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -26,14 +26,14 @@ const Home = () => {
       }
     };
 
-    fetchWorkerCount();
+    fetchGameDesignCount();
 
 
-    const fetchPuntorCount = async () => {
+    const fetchProgramerCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntor_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/programer_count`);
         if (response.data.Status) {
-          setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setProgramerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -44,14 +44,14 @@ const Home = () => {
       }
     };
 
-    fetchPuntorCount();
+    fetchProgramerCount();
 
 
-    const fetchMjeshterCount = async () => {
+    const fetchSoundEffectCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujimjeshter_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/soundeffect_count`);
         if (response.data.Status) {
-          setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setSoundEffectCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -62,7 +62,7 @@ const Home = () => {
       }
     };
 
-    fetchMjeshterCount();
+    fetchSoundEffectCount();
 
   }, []);
 
@@ -85,7 +85,7 @@ const Home = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{workerCount}</h5>
+                <h5>{gameDesignCount}</h5>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ const Home = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{mjeshterCount}</h5>
+                <h5>{programerCount}</h5>
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@ const Home = () => {
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{puntorCount}</h5>
+                <h5>{soundEffectCount}</h5>
               </div>
             </div>
           </div>
