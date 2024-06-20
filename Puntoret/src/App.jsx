@@ -10,7 +10,7 @@ import EditEmployee from './Components/EditEmployee'
 import Start from './Components/Start'
 import PrivateRoute from './Components/PrivateRoute'
 import Kryepuntor from './Components/GameDesign/Kryepuntor'
-import KryePuntorLogin from './Components/KryePuntorlogin'
+
 import KHome from './Components/GameDesign/KHome'
 import KEmployee from './Components/GameDesign/KEmployee'
 import KAddEmployee from './Components/GameDesign/KAddEmployee'
