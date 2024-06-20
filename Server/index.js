@@ -9,7 +9,7 @@ import { KontaRouter } from "./Routes/KontaRoute.js";
 
 const app = express() 
 app.use(cors({
-    origin: ["duartrizani.site","http://localhost:5173"],
+    origin: ["https://duartrizani.site","http://localhost:5173"],
     methods: ['GET', 'POST', 'PUT', "DELETE", "CREATE"],
     credentials: true
 }))
