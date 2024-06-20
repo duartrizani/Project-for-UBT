@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const KHome = () => {
+const ProgHome = () => {
   const [workerCount, setWorkerCount] = useState(0);
   const [puntorCount, setPuntorCount] = useState(0);
   const [mjeshterCount, setMjeshterCount] = useState(0);
@@ -10,7 +10,7 @@ const KHome = () => {
   useEffect(() => {
     const fetchWorkerCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntoret_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/ujipuntoret_count`);
         if (response.data.Status) {
           setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -27,7 +27,7 @@ const KHome = () => {
 
     const fetchPuntorCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntor_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/ujipuntor_count`);
         if (response.data.Status) {
           setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -44,7 +44,7 @@ const KHome = () => {
 
     const fetchMjeshterCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujimjeshter_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/ujimjeshter_count`);
         if (response.data.Status) {
           setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
@@ -61,7 +61,7 @@ const KHome = () => {
 
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/employeeuji`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/prog/employeeuji`);
         if (response.data.Status) {
           setEmployees(response.data.Result);
         } else {
@@ -154,4 +154,4 @@ const KHome = () => {
   );
 };
 
-export default KHome;
+export default ProgHome;

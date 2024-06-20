@@ -8,8 +8,6 @@ import Employee from './Components/Employee'
 import AddEmployee from './Components/AddEmployee'
 import EditEmployee from './Components/EditEmployee'
 import Start from './Components/Start'
-import EmployeeLogin from './Components/EmployeeLogin'
-import EmployeeDetail from './Components/EmployeeDetail'
 import PrivateRoute from './Components/PrivateRoute'
 import Kryepuntor from './Components/Uji-Kryepuntorët/Kryepuntor'
 import KryePuntorLogin from './Components/KryePuntorlogin'
@@ -34,6 +32,16 @@ import { useEffect, useState } from 'react'
 import ChangePassword from './Components/Puntoret/ChangePassword'
 import ContactForm from './Components/ContactForm'
 import AddAdmin from './Components/Admin/AddAdmin'
+import ProgMain from './Components/Programer/ProgMain'
+import ProgHome from './Components/Programer/ProgHome'
+import ProgEmployee from './Components/Programer/ProgEmployee'
+import ProgAddEmployee from './Components/Programer/ProgAddEmployee'
+import ProgEditEmployee from './Components/Programer/ProgEditEmployee'
+import Proglista from './Components/Programer/ProgLista'
+import ProgEditLista from './Components/Programer/ProgEditLista'
+import ProgAddLista from './Components/Programer/ProgAddLista'
+import ProgOret from './Components/Programer/ProgOret'
+import ProgPuntoret from './Components/Programer/ProgPuntoret'
 
 
 
@@ -76,6 +84,24 @@ function App() {
           <Route path='/kryepuntor/add_klista' element={<KAddLista />}></Route>
           <Route path='/kryepuntor/oret/:id' element={<KOret />}></Route>
           <Route path='/kryepuntor/puntoret' element={<KPuntoret />}></Route>
+
+
+        </Route>
+
+
+        {/* Programer */}
+        <Route path='/programer' element={<PrivateRoute allowedRoles={['Programer']}>
+          <ProgMain />
+        </PrivateRoute>}>
+          <Route path='' element={<ProgHome />}></Route>
+          <Route path='/programer/employee' element={<ProgEmployee />}></Route>
+          <Route path='/programer/add_employee' element={<ProgAddEmployee />}></Route>
+          <Route path='/programer/edit_employee/:id' element={<ProgEditEmployee />}></Route>
+          <Route path='/programer/klista' element={<Proglista />}></Route>
+          <Route path='/programer/edit_klista/:id' element={<ProgEditLista />}></Route>
+          <Route path='/programer/add_klista' element={<ProgAddLista />}></Route>
+          <Route path='/programer/oret/:id' element={<ProgOret />}></Route>
+          <Route path='/programer/puntoret' element={<ProgPuntoret />}></Route>
 
 
         </Route>

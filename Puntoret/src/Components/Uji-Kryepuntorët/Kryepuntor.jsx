@@ -26,7 +26,7 @@ const Kryepuntor = () => {
               className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
             >
               <span className="fs-5 fw-bolder d-none d-sm-inline">
-                DP Partners
+                UBT Project
               </span>
             </Link>
             <ul
@@ -92,7 +92,7 @@ const Kryepuntor = () => {
 {/* Content */}
 <div className="flex-grow">
         <div className="p-2 flex justify-center shadow text-xl font-bold py-3">
-          <h4>Sistemi i Puntorëve DP Partners</h4>
+          <h4>Sistemi i Puntorëve</h4>
         </div>
         <Outlet />
       </div>

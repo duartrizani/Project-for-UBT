@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
 
-const Dashboard = () => {
+const ProgMain = () => {
   const anvigate = useNavigate()
   axios.defaults.withCredentials = true
   const handleLogout = () => {
@@ -11,15 +11,15 @@ const Dashboard = () => {
     .then(result => {
       if(result.data.Status) { 
         localStorage.removeItem("valid")
-        localStorage.removeItem("role", "admin");
+        localStorage.removeItem("role", "uji");
         anvigate('/')
       }
     })
   }
   return (
-    <div className="container-fluid">
-      <div className="row flex-nowrap">
-        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+    <div className="flex">
+    
+    <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark max-lg:hidden">
           <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <Link
               to="/dashboard"
@@ -35,7 +35,7 @@ const Dashboard = () => {
             >
               <li className="w-100">
                 <Link
-                  to="/dashboard"
+                  to="/kryepuntor"
                   className="nav-link text-white px-0 align-middle"
                 >
                   <i className="fs-4 bi-speedometer2 ms-2"></i>
@@ -44,7 +44,7 @@ const Dashboard = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/dashboard/employee"
+                  to="/kryepuntor/employee"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi-people ms-2"></i>
@@ -55,12 +55,24 @@ const Dashboard = () => {
               </li>
               <li className="w-100">
                 <Link
-                  to="/dashboard/puntoretuji"
+                  to="/kryepuntor/klista"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-people ms-2"></i>
+                  <i className="bi bi-columns text-xl ms-2"></i>
                   <span className="ms-2 d-none d-sm-inline">
-                    Puntorët e Ujit
+                    Lista
+                  </span>
+                </Link>
+              </li>
+
+              <li className="w-100">
+                <Link
+                  to="/kryepuntor/puntoret"
+                  className="nav-link px-0 align-middle text-white"
+                >
+                  <i className="bi bi-person text-xl ms-2"></i>
+                  <span className="ms-2 d-none d-sm-inline">
+                    Rroga dhe Orët
                   </span>
                 </Link>
               </li>
@@ -77,15 +89,47 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-        <div className="col p-0 m-0">
-            <div className="p-2 d-flex justify-content-center shadow">
-                <h4>Emoployee Management System</h4>
-            </div>
-            <Outlet />
+{/* Content */}
+<div className="flex-grow">
+        <div className="p-2 flex justify-center shadow text-xl font-bold py-3">
+          <h4>Sistemi i Puntorëve</h4>
         </div>
+        <Outlet />
       </div>
+      
+
+      {/* Navigation Bar - Mobile (Bottom) */}
+      <ul className="lg:hidden fixed w-full bg-dark p-3 flex justify-around items-center overflow-hidden">
+  <li className="">
+    <Link to="/kryepuntor" className="text-white">
+      <i className="bi bi-speedometer2 text-xl"></i>
+    </Link>
+  </li>
+  <li className="">
+    <Link to="/kryepuntor/employee" className="text-white">
+      <i className="bi bi-people text-xl"></i>
+    </Link>
+  </li>
+  <li className="">
+    <Link to="/kryepuntor/klista" className="text-white">
+      <i className="bi bi-columns text-xl"></i>
+    </Link>
+  </li>
+
+  <li className="">
+    <Link to="/kryepuntor/puntoret" className="text-white">
+      <i className="bi bi-person text-xl"></i>
+    </Link>
+  </li>
+  <li className="" onClick={handleLogout}>
+    <a className="text-white cursor-pointer">
+      <i className="bi bi-power text-xl"></i>
+    </a>
+  </li>
+</ul>
+
     </div>
   );
 };
 
-export default Dashboard;
+export default ProgMain;

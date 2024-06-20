@@ -6,7 +6,7 @@ function DataPuntoret({ initialWorkerId }) {
     const [workerId, setWorkerId] = useState(initialWorkerId || localStorage.getItem('workerId'));
     const [employee, setEmployee] = useState([]);
     const [worker, setWorker] = useState({});
-    const [selectedMonth, setSelectedMonth] = useState(new Date().toISOString().slice(0, 7)); // Track selected month (0-11)
+    const [selectedMonth, setSelectedMonth] = useState(new Date().toISOString().slice(0, 7)); // Track selected month
 
     const navigate = useNavigate()
   
@@ -33,7 +33,7 @@ function DataPuntoret({ initialWorkerId }) {
         }).catch(err => console.log(err))
   
       fetchEmployees();
-    }, [workerId]); // Fetch data on id change only (no dependency on selectedMonth)
+    }, [workerId]); // Fetch data on id change only 
   
     const handleMonthChange = (event) => {
       setSelectedMonth(event.target.value);

@@ -6,6 +6,7 @@ import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { KryePuntorRouter } from "./Routes/KryePuntorRoute.js";
 import { KontaRouter } from "./Routes/KontaRoute.js";
+import { ProgramerRouter } from "./Routes/ProgramerRoute.js";
 
 const app = express() 
 app.use(cors({
@@ -19,6 +20,7 @@ app.use('/auth', adminRouter)
 app.use('/employee', EmployeeRouter)
 app.use('/krye', KryePuntorRouter)
 app.use('/konta', KontaRouter)
+app.use('/prog', ProgramerRouter)
 app.use(express.static('Public'))
 
 const verifyUser = (req, res, next) => {

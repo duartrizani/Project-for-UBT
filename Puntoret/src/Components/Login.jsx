@@ -33,6 +33,12 @@ const PuntorLogin = ({ setWorkerId }) => {
               navigate('/kryepuntor')
               break;
 
+            case 'programer':
+              localStorage.setItem("valid", true)
+              localStorage.setItem("role", "programer");
+              navigate('/programer')
+              break;
+
 
             case 'kontabilist':
               localStorage.setItem("valid", true)
