@@ -94,7 +94,7 @@ const Home = () => {
 
         <div class="col-md-4 md:pr-5">
           <div class="card card-2 h-[200px] justify-center "
-          onClick={() => navigate("/dashboard/programers/employee")}>
+          onClick={() => navigate("/dashboard/programer/employee")}>
             <div>
               <div className='text-center pb-1'>
                 <h4>Programers</h4>

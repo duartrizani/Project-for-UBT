@@ -183,9 +183,9 @@ router.delete('/delete_employee/:id', (req, res) => {
 
   router.get('/gamedesign_count', async (req, res) => {
     try {
-      const sql = "SELECT COUNT(id) AS count FROM gamedesign";
+      const sql = "SELECT COUNT(id) AS count FROM programer";
       const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].count }); // Access the count property
+      return res.json({ Status: true, Result: { worker_count: result[0].count } });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ Status: false, Error: `Error fetching programer count: ${err.message}` });
@@ -207,9 +207,9 @@ router.delete('/delete_employee/:id', (req, res) => {
 
   router.get('/soundeffect_count', async (req, res) => {
     try {
-      const sql = "SELECT COUNT(id) AS count FROM soundeffect";
+      const sql = "SELECT COUNT(id) AS count FROM programer";
       const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].count }); // Access the count property
+      return res.json({ Status: true, Result: { worker_count: result[0].count } });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ Status: false, Error: `Error fetching programer count: ${err.message}` });
@@ -217,51 +217,6 @@ router.delete('/delete_employee/:id', (req, res) => {
   });
   
   
-  
-  // Example with async/await (optional)
-  router.get('/employee_count', async (req, res) => {
-    try {
-      const sql = "select count(id) as employee from employee";
-      const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].employee });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
-    }
-  });
-
-  router.get('/salary_count', async (req, res) => {
-    try {
-      const sql = "select sum(salary) as salaryOFEmp from employee";
-      const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].salaryOFEmp }); // Assuming the sum is in the first element
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Status: false, Error: `Error fetching salary count: ${err.message}` });
-    }
-  });
-  
-  router.get('/admin_records', async (req, res) => {
-    try {
-      const sql = "select * from admin";
-      const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Status: false, Error: `Error fetching admin records: ${err.message}` });
-    }
-  });
-  
-  router.get('/kryepuntoruji', async (req, res) => {
-    try {
-      const sql = "select * from kryepuntorët";
-      const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ Status: false, Error: `Error fetching kryepuntorët: ${err.message}` });
-    }
-  });
 
 router.get('/logout', (req, res) => {
     res.clearCookie('token')
