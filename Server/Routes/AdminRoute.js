@@ -196,12 +196,13 @@ router.delete('/delete_employee/:id', (req, res) => {
     try {
       const sql = "SELECT COUNT(id) AS count FROM programer";
       const [result] = await con.query(sql);
-      return res.json({ Status: true, Result: result[0].count }); // Access the count property
+      return res.json({ Status: true, Result: { worker_count: result[0].count } });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ Status: false, Error: `Error fetching programer count: ${err.message}` });
     }
   });
+  
   
 
   router.get('/soundeffect_count', async (req, res) => {
