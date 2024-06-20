@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-const AddPuntoretUji = () => {
+const ASoundAddEmployee = () => {
   const [employee, setEmployee] = useState({
     worker_id:"",
     name: "",
     salary: "",
-    role: "Mjeshtër",
-    data: new Date().toISOString().slice(0, 10)
+    role: "Senior",
   });
   const navigate = useNavigate()
   
@@ -24,15 +23,13 @@ const AddPuntoretUji = () => {
 
   const handleSubmit = (e) => {
 
-    
     e.preventDefault()
-
-    
+  
         
-      axios.post('http://localhost:3000/krye/add_employee', employee)
+      axios.post(`${import.meta.env.VITE_API_URL}/sound/add_employee`, employee)
       .then(result => {
           if(result.data.Status) {
-              navigate('/dashboard/puntoretuji')
+              navigate('/dashboard/soundeffect/employee')
           } else {
               alert(result.data.Error)
               
@@ -40,15 +37,14 @@ const AddPuntoretUji = () => {
       })
       .catch(err => console.log(err))
 
-      axios.post('http://localhost:3000/krye/worker_data', employee)
 
   }
 
 
 
   return (
-    <div className="d-flex justify-content-center align-items-center mt-3">
-      <div className="p-3 rounded w-50 border">
+    <div className="flex justify-center align-items-center mt-3">
+      <div className="p-3 rounded border max-md:w-[80%]">
         <h3 className="text-center">Add Employee</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12"> 
@@ -86,8 +82,9 @@ const AddPuntoretUji = () => {
             </label>
             <select name="role" id="role" className="form-select"
                 onChange={(e) => setEmployee({...employee, role: e.target.value})}>
-              <option value="Mjeshtër">Mjeshtër</option>;
-              <option value="Punëtor">Punëtor</option>;
+              <option value="Senior">Senior</option>;
+              <option value="Mid-level">Mid-level</option>;
+              <option value="Junior">Junior</option>;
             </select>
           </div>
           <div className="col-12">
@@ -101,4 +98,4 @@ const AddPuntoretUji = () => {
   );
 };
 
-export default AddPuntoretUji;
+export default ASoundAddEmployee;

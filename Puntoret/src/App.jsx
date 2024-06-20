@@ -1,16 +1,14 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Components/Login'
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import Dashboard from './Components/Dashboard'
-import Home from './Components/Home'
-import Employee from './Components/Employee'
-import AddEmployee from './Components/AddEmployee'
-import EditEmployee from './Components/EditEmployee'
+import { useEffect, useState } from 'react'
+
+import Login from './Components/Login'
+import Dashboard from './Components/Admin/Dashboard'
+import Home from './Components/Admin/Home'
 import Start from './Components/Start'
 import PrivateRoute from './Components/PrivateRoute'
 import Kryepuntor from './Components/GameDesign/Kryepuntor'
-
 import KHome from './Components/GameDesign/KHome'
 import KEmployee from './Components/GameDesign/KEmployee'
 import KAddEmployee from './Components/GameDesign/KAddEmployee'
@@ -18,20 +16,14 @@ import KEditEmployee from './Components/GameDesign/KEditEmployee'
 import Klista from './Components/GameDesign/KLista'
 import KEditLista from './Components/GameDesign/KEditLista'
 import KAddLista from './Components/GameDesign/KAddLista'
-import PuntoretUji from './Components/Admin/PuntoretUji'
-import AddPuntoretUji from './Components/Admin/AddPuntoretUji'
-import EditPuntoretUji from './Components/Admin/EditPuntoretUji'
 import KOret from './Components/GameDesign/KOret'
 import KPuntoret from './Components/GameDesign/KPuntoret'
 import KontaDashboard from './Components/Kontabilist/KontaDashboard'
 import KontaHome from './Components/Kontabilist/KontaHome'
 import GameDesign from './Components/Kontabilist/GameDesign'
 import DataPuntoret from './Components/Puntoret/DataPuntoret'
-import PuntorLogin from './Components/Puntoret/PuntorLogin'
-import { useEffect, useState } from 'react'
 import ChangePassword from './Components/Puntoret/ChangePassword'
 import ContactForm from './Components/ContactForm'
-import AddAdmin from './Components/Admin/AddAdmin'
 import ProgMain from './Components/Programer/ProgMain'
 import ProgHome from './Components/Programer/ProgHome'
 import ProgEmployee from './Components/Programer/ProgEmployee'
@@ -54,6 +46,30 @@ import SoundAddLista from './Components/SoundEffect/SoundAddLista'
 import SoundOret from './Components/SoundEffect/SoundOret'
 import SoundPuntoret from './Components/SoundEffect/SoundPuntoret'
 import SoundEffect from './Components/Kontabilist/SoundEffect'
+import AKEmployee from './Components/Admin/AGameDesign/AKEmployee'
+import AKAddEmployee from './Components/Admin/AGameDesign/AKAddEmployee'
+import AKEditEmployee from './Components/Admin/AGameDesign/AKEditEmployee'
+import AKlista from './Components/Admin/AGameDesign/AKLista'
+import AKEditLista from './Components/Admin/AGameDesign/AKEditLista'
+import AKAddLista from './Components/Admin/AGameDesign/AKAddLista'
+import AKOret from './Components/Admin/AGameDesign/AKOret'
+import AKPuntoret from './Components/Admin/AGameDesign/AKPuntoret'
+import AProgEmployee from './Components/Admin/AProgramer/AProgEmployee'
+import AProgAddEmployee from './Components/Admin/AProgramer/AProgAddEmployee'
+import AProgEditEmployee from './Components/Admin/AProgramer/AProgEditEmployee'
+import AProglista from './Components/Admin/AProgramer/AProgLista'
+import AProgEditLista from './Components/Admin/AProgramer/AProgEditLista'
+import AProgAddLista from './Components/Admin/AProgramer/AProgAddLista'
+import AProgOret from './Components/Admin/AProgramer/AProgOret'
+import AProgPuntoret from './Components/Admin/AProgramer/AProgPuntoret'
+import ASoundEmployee from './Components/Admin/ASoundEffect/ASoundEmployee'
+import ASoundAddEmployee from './Components/Admin/ASoundEffect/ASoundAddEmployee'
+import ASoundEditEmployee from './Components/Admin/ASoundEffect/ASoundEditEmployee'
+import ASoundLista from './Components/Admin/ASoundEffect/ASoundLista'
+import ASoundEditLista from './Components/Admin/ASoundEffect/ASoundEditLista'
+import ASoundAddLista from './Components/Admin/ASoundEffect/ASoundAddLista'
+import ASoundOret from './Components/Admin/ASoundEffect/ASoundOret'
+import ASoundPuntoret from './Components/Admin/ASoundEffect/ASoundPuntoret'
 
 
 
@@ -83,8 +99,8 @@ function App() {
         <Route path='/login' element={<Login setWorkerId={setWorkerId} />}></Route>
         <Route path='/contactus' element={<ContactForm />}></Route>
 
-        {/* UJI */}
-        <Route path='/gamedesign' element={<PrivateRoute allowedRoles={['gamedesign','admin']}>
+        {/* Game Design */}
+        <Route path='/gamedesign' element={<PrivateRoute allowedRoles={['gamedesign']}>
           <Kryepuntor />
         </PrivateRoute>}>
           <Route path='' element={<KHome />}></Route>
@@ -102,7 +118,7 @@ function App() {
 
 
         {/* Programer */}
-        <Route path='/programer' element={<PrivateRoute allowedRoles={['programer','admin']}>
+        <Route path='/programer' element={<PrivateRoute allowedRoles={['programer']}>
           <ProgMain />
         </PrivateRoute>}>
           <Route path='' element={<ProgHome />}></Route>
@@ -121,7 +137,7 @@ function App() {
 
 
         {/* Sound Effect */}
-        <Route path='/soundeffect' element={<PrivateRoute allowedRoles={['soundeffect','admin']}>
+        <Route path='/soundeffect' element={<PrivateRoute allowedRoles={['soundeffect']}>
           <SoundMain />
         </PrivateRoute>}>
           <Route path='' element={<SoundHome />}></Route>
@@ -165,14 +181,40 @@ function App() {
           </PrivateRoute>
         }>
           <Route path='' element={<Home />}></Route>
-          <Route path='/dashboard/employee' element={<Employee />}></Route>
-          <Route path='/dashboard/add_employee' element={<AddEmployee />}></Route>
-          <Route path='/dashboard/edit_employee/:id' element={<EditEmployee />}></Route>
 
-          {/* Admin */}
-          <Route path='/dashboard/puntoretuji' element={<PuntoretUji />}></Route>
-          <Route path='/dashboard/addpuntoretuji' element={<AddPuntoretUji />}></Route>
-          <Route path='/dashboard/editpuntoretuji/:id' element={<EditPuntoretUji />}></Route>
+        {/* Game Design */}
+          <Route path='/dashboard/gamedesign/employee' element={<AKEmployee />}></Route>
+          <Route path='/dashboard/gamedesign/add_employee' element={<AKAddEmployee />}></Route>
+          <Route path='/dashboard/gamedesign/edit_employee/:id' element={<AKEditEmployee />}></Route>
+          <Route path='/dashboard/gamedesign/klista' element={<AKlista />}></Route>
+          <Route path='/dashboard/gamedesign/edit_klista/:id' element={<AKEditLista />}></Route>
+          <Route path='/dashboard/gamedesign/add_klista' element={<AKAddLista />}></Route>
+          <Route path='/dashboard/gamedesign/oret/:id' element={<AKOret />}></Route>
+          <Route path='/dashboard/gamedesign/puntoret' element={<AKPuntoret />}></Route>
+
+
+          {/* Programer */}
+          <Route path='/dashboard/programer/employee' element={<AProgEmployee />}></Route>
+          <Route path='/dashboard/programer/add_employee' element={<AProgAddEmployee />}></Route>
+          <Route path='/dashboard/programer/edit_employee/:id' element={<AProgEditEmployee />}></Route>
+          <Route path='/dashboard/programer/klista' element={<AProglista />}></Route>
+          <Route path='/dashboard/programer/edit_klista/:id' element={<AProgEditLista />}></Route>
+          <Route path='/dashboard/programer/add_klista' element={<AProgAddLista />}></Route>
+          <Route path='/dashboard/programer/oret/:id' element={<AProgOret />}></Route>
+          <Route path='/dashboard/programer/puntoret' element={<AProgPuntoret />}></Route>
+
+
+          {/* Sound Effect */}
+          <Route path='/dashboard/soundeffect/employee' element={<ASoundEmployee />}></Route>
+          <Route path='/dashboard/soundeffect/add_employee' element={<ASoundAddEmployee />}></Route>
+          <Route path='/dashboard/soundeffect/edit_employee/:id' element={<ASoundEditEmployee />}></Route>
+          <Route path='/dashboard/soundeffect/klista' element={<ASoundLista />}></Route>
+          <Route path='/dashboard/soundeffect/edit_klista/:id' element={<ASoundEditLista />}></Route>
+          <Route path='/dashboard/soundeffect/add_klista' element={<ASoundAddLista />}></Route>
+          <Route path='/dashboard/soundeffect/oret/:id' element={<ASoundOret />}></Route>
+          <Route path='/dashboard/soundeffect/puntoret' element={<ASoundPuntoret />}></Route>
+
+
         </Route>
       </Routes>
     </BrowserRouter>

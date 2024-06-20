@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-const AddAdmin = () => {
+const AProgAddEmployee = () => {
   const [employee, setEmployee] = useState({
     worker_id:"",
     name: "",
     salary: "",
-    role: "Mjeshtër",
+    role: "Senior",
   });
   const navigate = useNavigate()
   
@@ -26,10 +26,10 @@ const AddAdmin = () => {
     e.preventDefault()
   
         
-      axios.post(`${import.meta.env.VITE_API_URL}/krye/add_employee`, employee)
+      axios.post(`${import.meta.env.VITE_API_URL}/prog/add_employee`, employee)
       .then(result => {
           if(result.data.Status) {
-              navigate('/kryepuntor/employee')
+              navigate('/dashboard/programer/employee')
           } else {
               alert(result.data.Error)
               
@@ -82,8 +82,9 @@ const AddAdmin = () => {
             </label>
             <select name="role" id="role" className="form-select"
                 onChange={(e) => setEmployee({...employee, role: e.target.value})}>
-              <option value="Mjeshtër">Mjeshtër</option>;
-              <option value="Punëtor">Punëtor</option>;
+              <option value="Senior">Senior</option>;
+              <option value="Mid-level">Mid-level</option>;
+              <option value="Junior">Junior</option>;
             </select>
           </div>
           <div className="col-12">
@@ -97,4 +98,4 @@ const AddAdmin = () => {
   );
 };
 
-export default AddAdmin;
+export default AProgAddEmployee;

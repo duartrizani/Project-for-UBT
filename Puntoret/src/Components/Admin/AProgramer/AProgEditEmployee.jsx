@@ -1,43 +1,56 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const EditPuntoretUji = () => {
-    const {id} = useParams()
-    const [employee, setEmployee] = useState({
-        name: "",
-        salary: "",
-        role: "Mjeshtër",
-      });
-      const navigate = useNavigate()
+const AProgEditEmployee = () => {
+  const { id } = useParams();
+  const [employee, setEmployee] = useState({
+    name: "",
+    salary: "",
+    role: "Senior",
+  });
+  const navigate = useNavigate();
 
-      useEffect(()=> {
-        axios.get('http://localhost:3000/krye/employee/'+id)
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/prog/employee/` + id)
+      .then(result => {
+        setEmployee({
+          ...employee,
+          name: result.data.Result[0].name,
+          salary: result.data.Result[0].salary,
+          role: result.data.Result[0].role,
+        })
+      }).catch(err => console.log(err))
+  }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put(`${import.meta.env.VITE_API_URL}/prog/edit_employee/` + id, employee)
+      .then(result => {
+        if (result.data.Status) {
+          navigate('/dashboard/programer/employee').reload();
+        } else {
+          alert(result.data.Error);
+        }
+      }).catch(err => console.log(err));
+
+    // Check if salary has changed
+    const originalSalary = result.data.Result[0].salary;
+    if (employee.salary !== originalSalary) {
+      axios.put(`${import.meta.env.VITE_API_URL}/prog/edit_employee/${id}`, { salary: employee.salary })
         .then(result => {
-            setEmployee({
-                ...employee,
-                name: result.data.Result[0].name,
-                salary: result.data.Result[0].salary,
-                role: result.data.Result[0].role,
-            })
-        }).catch(err => console.log(err))
-    }, [])
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.put('http://localhost:3000/krye/edit_employee/'+id, employee)
-        .then(result => {
-            if(result.data.Status) {
-                navigate('/dashboard/puntoretuji')
-            } else {
-                alert(result.data.Error)
-            }
-        }).catch(err => console.log(err))
+          if (result.data.Status) {
+            // Optional: Display success message for salary update
+          } else {
+            alert(result.data.Error);
+          }
+        }).catch(err => console.log(err));
     }
+  }
     
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
-      <div className="p-3 rounded w-50 border">
+      <div className="p-3 rounded border max-md:w-[80%]">
         <h3 className="text-center">Edit Employee</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
@@ -78,8 +91,9 @@ const EditPuntoretUji = () => {
             <select name="category" id="category" className="form-select"
                 onChange={(e) => setEmployee({...employee, role: e.target.value})}>
                   <option value="" selected disabled>Zgjidh</option>;
-                  <option value="Mjeshtër">Mjeshtër</option>;
-                  <option value="Punëtor">Punëtor</option>;
+                  <option value="Senior">Senior</option>;
+                  <option value="Mid-level">Mid-level</option>;
+                  <option value="Junior">Junior</option>;
             </select>
           </div>
           
@@ -94,4 +108,4 @@ const EditPuntoretUji = () => {
   )
 }
 
-export default EditPuntoretUji
+export default AProgEditEmployee
