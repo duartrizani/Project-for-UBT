@@ -4,7 +4,7 @@ import { adminRouter } from "./Routes/AdminRoute.js";
 import { EmployeeRouter } from "./Routes/EmployeeRoute.js";
 import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import { KryePuntorRouter } from "./Routes/KryePuntorRoute.js";
+import { GameDesignRouter } from "./Routes/GameDesignRoute.js";
 import { KontaRouter } from "./Routes/KontaRoute.js";
 import { ProgramerRouter } from "./Routes/ProgramerRoute.js";
 
@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use('/auth', adminRouter)
 app.use('/employee', EmployeeRouter)
-app.use('/krye', KryePuntorRouter)
+app.use('/krye', GameDesignRouter)
 app.use('/konta', KontaRouter)
 app.use('/prog', ProgramerRouter)
 app.use(express.static('Public'))

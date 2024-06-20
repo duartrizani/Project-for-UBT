@@ -375,4 +375,4 @@ router.get("/logout", (req, res) => {
   return res.json({ Status: true });
 });
 
-export { router as KryePuntorRouter };
+export { router as GameDesignRouter };
