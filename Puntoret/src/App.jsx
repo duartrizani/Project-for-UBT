@@ -84,18 +84,18 @@ function App() {
         <Route path='/contactus' element={<ContactForm />}></Route>
 
         {/* UJI */}
-        <Route path='/kryepuntor' element={<PrivateRoute allowedRoles={['uji']}>
+        <Route path='/gamedesign' element={<PrivateRoute allowedRoles={['gamedesign']}>
           <Kryepuntor />
         </PrivateRoute>}>
           <Route path='' element={<KHome />}></Route>
-          <Route path='/kryepuntor/employee' element={<KEmployee />}></Route>
-          <Route path='/kryepuntor/add_employee' element={<KAddEmployee />}></Route>
-          <Route path='/kryepuntor/edit_employee/:id' element={<KEditEmployee />}></Route>
-          <Route path='/kryepuntor/klista' element={<Klista />}></Route>
-          <Route path='/kryepuntor/edit_klista/:id' element={<KEditLista />}></Route>
-          <Route path='/kryepuntor/add_klista' element={<KAddLista />}></Route>
-          <Route path='/kryepuntor/oret/:id' element={<KOret />}></Route>
-          <Route path='/kryepuntor/puntoret' element={<KPuntoret />}></Route>
+          <Route path='/gamedesign/employee' element={<KEmployee />}></Route>
+          <Route path='/gamedesign/add_employee' element={<KAddEmployee />}></Route>
+          <Route path='/gamedesign/edit_employee/:id' element={<KEditEmployee />}></Route>
+          <Route path='/gamedesign/klista' element={<Klista />}></Route>
+          <Route path='/gamedesign/edit_klista/:id' element={<KEditLista />}></Route>
+          <Route path='/gamedesign/add_klista' element={<KAddLista />}></Route>
+          <Route path='/gamedesign/oret/:id' element={<KOret />}></Route>
+          <Route path='/gamedesign/puntoret' element={<KPuntoret />}></Route>
 
 
         </Route>
@@ -139,7 +139,9 @@ function App() {
 
         {/* KONTABILIST */}
 
-        <Route path='/kontabilist' element={<KontaDashboard />}>
+        <Route path='/kontabilist' element={<PrivateRoute allowedRoles={['kontabilist']}>
+          <KontaDashboard />
+          </PrivateRoute>}>
           <Route path='' element={<KontaHome />}></Route>
           <Route path='/kontabilist/gamedesign' element={<GameDesign />}></Route>
           <Route path='/kontabilist/programers' element={<Programers />}></Route>

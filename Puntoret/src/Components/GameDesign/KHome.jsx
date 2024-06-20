@@ -1,18 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const KHome = () => {
-  const [workerCount, setWorkerCount] = useState(0);
-  const [puntorCount, setPuntorCount] = useState(0);
-  const [mjeshterCount, setMjeshterCount] = useState(0);
+const ProgHome = () => {
+  const [seniorCount, setSeniorCount] = useState(0);
+  const [juniorCount, setJuniorCount] = useState(0);
+  const [midlevelCount, setMidlevelCount] = useState(0);
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     const fetchWorkerCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntoret_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/senior_count`);
         if (response.data.Status) {
-          setWorkerCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setSeniorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -27,9 +27,9 @@ const KHome = () => {
 
     const fetchPuntorCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujipuntor_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/junior_count`);
         if (response.data.Status) {
-          setPuntorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setJuniorCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -44,9 +44,9 @@ const KHome = () => {
 
     const fetchMjeshterCount = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/ujimjeshter_count`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/midlevel_count`);
         if (response.data.Status) {
-          setMjeshterCount(response.data.Result.worker_count); // Assuming 'worker_count' property
+          setMidlevelCount(response.data.Result.worker_count); // Assuming 'worker_count' property
         } else {
           console.error("Error fetching worker count:", response.data.Error);
           // Handle error (e.g., display an error message to the user)
@@ -82,12 +82,12 @@ const KHome = () => {
           <div className="card card-1">
             <div>
               <div className='text-center pb-1'>
-                <h4>Puntorë Total</h4>
+                <h4>Senior</h4>
               </div>
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{workerCount}</h5>
+                <h5>{seniorCount}</h5>
               </div>
             </div>
           </div>
@@ -97,12 +97,12 @@ const KHome = () => {
           <div className="card card-2">
             <div>
               <div className='text-center pb-1'>
-                <h4>Mjeshtër</h4>
+                <h4>Mid-level</h4>
               </div>
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{mjeshterCount}</h5>
+                <h5>{midlevelCount}</h5>
               </div>
             </div>
           </div>
@@ -112,12 +112,12 @@ const KHome = () => {
           <div className="card card-3">
             <div>
               <div className='text-center pb-1'>
-                <h4>Puntorë</h4>
+                <h4>Junior</h4>
               </div>
               <hr />
               <div className='d-flex justify-content-between'>
                 <h5>Totali:</h5>
-                <h5>{puntorCount}</h5>
+                <h5>{juniorCount}</h5>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ const KHome = () => {
       </div>
 
       <div className='flex flex-col mt-4 pt-3 pl-5 max-md:w-full'>
-        <h3 className=''>List of Employees in Team "uji"</h3>
+        <h3 className=''>Kryepuntori i Team "Programer"</h3>
         <table className="table justify-evenly">
           <thead>
             <tr>
@@ -152,4 +152,4 @@ const KHome = () => {
   );
 };
 
-export default KHome;
+export default ProgHome;

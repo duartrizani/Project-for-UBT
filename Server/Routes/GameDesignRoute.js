@@ -58,7 +58,7 @@ router.get("/employee", async (req, res) => {
 
 router.get("/employeegamedesign", async (req, res) => {
   try {
-    const sql = "SELECT * FROM gamedesign WHERE team = 'uji' ORDER BY name ASC";
+    const sql = "SELECT * FROM gamedesign WHERE team = 'gamedesign' ORDER BY name ASC";
     const [result] = await con.query(sql);
 
     return res.json({ Status: true, Result: result });
@@ -236,37 +236,37 @@ router.delete("/delete_klista/:id", async (req, res) => {
   }
 });
 
-router.get('/ujipuntoret_count', async (req, res) => {
+router.get('/senior_count', async (req, res) => {
   try {
-    const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign";  // Corrected query syntax
-    const [result] = await con.query(sql);
-    return res.json({ Status: true, Result: result[0] });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
-  }
+      const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign WHERE role = 'Senior'";
+      const [result] = await con.query(sql);
+      return res.json({ Status: true, Result: result[0] });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
+    }
+  });
+
+router.get('/junior_count', async (req, res) => {
+try {
+  const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign WHERE role = 'Junior'";
+  const [result] = await con.query(sql);
+  return res.json({ Status: true, Result: result[0] });
+} catch (err) {
+  console.error(err);
+  return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
+}
 });
 
-router.get('/ujipuntor_count', async (req, res) => {
-  try {
-    const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign WHERE role = 'Punëtor'";
-    const [result] = await con.query(sql);
-    return res.json({ Status: true, Result: result[0] });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
-  }
-});
-
-router.get('/ujimjeshter_count', async (req, res) => {
-  try {
-    const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign WHERE role = 'Mjeshtër'";
-    const [result] = await con.query(sql);
-    return res.json({ Status: true, Result: result[0] });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
-  }
+router.get('/midlevel_count', async (req, res) => {
+try {
+  const sql = "SELECT COUNT(*) AS worker_count FROM gamedesign WHERE role = 'Mid-level'";
+  const [result] = await con.query(sql);
+  return res.json({ Status: true, Result: result[0] });
+} catch (err) {
+  console.error(err);
+  return res.status(500).json({ Status: false, Error: `Error fetching employee count: ${err.message}` });
+}
 });
 
 

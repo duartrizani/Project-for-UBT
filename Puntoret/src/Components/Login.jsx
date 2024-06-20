@@ -27,10 +27,10 @@ const PuntorLogin = ({ setWorkerId }) => {
               break;
 
 
-            case 'uji':
+            case 'gamedesign':
               localStorage.setItem("valid", true)
-              localStorage.setItem("role", "uji");
-              navigate('/kryepuntor')
+              localStorage.setItem("role", "gamedesign");
+              navigate('/gamedesign')
               break;
 
             case 'programer':
@@ -48,6 +48,7 @@ const PuntorLogin = ({ setWorkerId }) => {
 
             case 'kontabilist':
               localStorage.setItem("valid", true)
+              localStorage.setItem("role", "kontabilist");
               navigate('/kontabilist')
               break;
 
