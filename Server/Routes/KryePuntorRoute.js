@@ -108,6 +108,19 @@ router.get("/employee", async (req, res) => {
 });
 
 
+router.get("/employeeuji", async (req, res) => {
+  try {
+    const sql = "SELECT * FROM puntoretuji WHERE team = 'uji' ORDER BY name ASC";
+    const [result] = await con.query(sql);
+
+    return res.json({ Status: true, Result: result });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ Status: false, Error: "Failed to retrieve employees" });
+  }
+});
+
+
 
 // Get Employee by ID
 router.get("/employee/:worker_id", async (req, res) => {

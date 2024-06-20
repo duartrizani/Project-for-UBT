@@ -5,6 +5,7 @@ const KHome = () => {
   const [workerCount, setWorkerCount] = useState(0);
   const [puntorCount, setPuntorCount] = useState(0);
   const [mjeshterCount, setMjeshterCount] = useState(0);
+  const [worker, setWorker] = useState([]);
 
 
   useEffect(() => {
@@ -60,6 +61,24 @@ const KHome = () => {
     };
 
     fetchMjeshterCount();
+
+
+    const fetchWorker = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/krye/employeeuji`);
+        if (response.data.Status) {
+          setWorker(response.data.Result.worker_count); 
+        } else {
+          console.error("Error fetching worker count:", response.data.Error);
+
+        }
+      } catch (error) {
+        console.error("Error fetching worker count:", error);
+
+      }
+    };
+
+    fetchWorker();
 
   }, []);
 
@@ -139,7 +158,10 @@ const KHome = () => {
             </tr>
           </thead>
           <tbody>
-            Something else COMING SOON!
+            {worker.map((e) => (
+
+              <p>{e.name}</p>
+            ))}
           </tbody>
         </table>
       </div>
