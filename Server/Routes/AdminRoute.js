@@ -46,7 +46,7 @@ router.post('/create-team', (req, res) => {
       import React from 'react';
       import { useNavigate } from 'react-router-dom';
 
-      const Component = () => {
+      const A${teamName} = () => {
           const navigate = useNavigate();
 
           const navigateToEmployee = () => {
@@ -61,7 +61,7 @@ router.post('/create-team', (req, res) => {
           );
       };
 
-      export default Component;
+      export default A${teamName};
   `;
 
   try {
