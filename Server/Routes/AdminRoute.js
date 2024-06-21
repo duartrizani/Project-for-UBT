@@ -5,13 +5,9 @@ import bcrypt from 'bcrypt'
 import multer from "multer";
 import path from "path";
 import fs from "fs"
-import { fileURLToPath } from 'url';
 
 // Setup express router
 const router = express.Router();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'Public/Images');
