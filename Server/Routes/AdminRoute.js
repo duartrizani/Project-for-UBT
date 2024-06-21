@@ -29,58 +29,32 @@ const storage = multer.diskStorage({
 
 
 
-const ensureDirectoryExistence = (dirPath) => {
-  if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-  }
+  const ensureDirectoryExistence = (dirPath) => {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+    }
 };
 
-
-  
 router.post('/create-team', (req, res) => {
-  const { teamName } = req.body;
+    const { teamName } = req.body;
 
-  console.log('Received request to create team:', teamName);
+    console.log('Received request to create team:', teamName);
 
-  const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', `A${teamName}`);
-  const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
+    // Construct the base path correctly
+    const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', teamName);
 
-  const boilerplateCode = (teamPath) => `
-      import React from 'react';
-      import { useNavigate } from 'react-router-dom';
+    try {
+        ensureDirectoryExistence(basePath);
 
-      const Component = () => {
-          const navigate = useNavigate();
+        // Optional: Create files inside the newly created directory if needed
+        // fs.writeFileSync(path.join(basePath, 'exampleFile.txt'), 'Hello, World!', 'utf8');
 
-          const navigateToEmployee = () => {
-              navigate('/dashboard/${teamPath}/employee');
-          };
-
-          return (
-              <div>
-                  <h1>Hello from ${teamName}</h1>
-                  <button onClick={navigateToEmployee}>Go to Employee</button>
-              </div>
-          );
-      };
-
-      export default Component;
-  `;
-
-  try {
-      ensureDirectoryExistence(basePath);
-
-      files.forEach(file => {
-          const filePath = path.join(basePath, file);
-          fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
-      });
-
-      console.log('Team created successfully:', basePath);
-      res.status(201).json({ message: 'Team created successfully' });
-  } catch (error) {
-      console.error('Error creating team:', error);
-      res.status(500).json({ message: 'Internal Server Error', error: error.message });
-  }
+        console.log('Team created successfully:', basePath);
+        res.status(201).json({ message: 'Team created successfully' });
+    } catch (error) {
+        console.error('Error creating team:', error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
 });
 
 
