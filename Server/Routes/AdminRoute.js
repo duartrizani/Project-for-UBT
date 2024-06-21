@@ -32,6 +32,10 @@ const storage = multer.diskStorage({
   router.post('/create-team', (req, res) => {
     const { teamName } = req.body;
 
+    if (!teamName || !/^[a-zA-Z0-9-_]+$/.test(teamName)) {
+        return res.status(400).json({ message: 'Invalid team name' });
+    }
+
     console.log('Received request to create team:', teamName);
 
     const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);

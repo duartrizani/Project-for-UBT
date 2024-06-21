@@ -15,15 +15,17 @@ const CreateTeam = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/create-team`, { teamName });
-      if (response.status === 201) {
-        navigate(`/dashboard/${teamName.toLowerCase()}`);
-      }
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/create-team`, { teamName });
+        if (response.status === 201) {
+            navigate(`/dashboard/${teamName.toLowerCase()}`);
+        }
     } catch (error) {
-      console.error('Error creating team:', error);
-      console.error('Error details:', error.response);
+        console.error('Error creating team:', error);
+        if (error.response) {
+            console.error('Error details:', error.response.data);
+        }
     }
-  };
+};
 
   return (
     <div>
