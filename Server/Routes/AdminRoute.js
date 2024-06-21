@@ -42,27 +42,29 @@ router.post('/create-team', (req, res) => {
   const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', `A${teamName}`);
   const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
 
-  const boilerplateCode = (teamPath) => `
-      import React from 'react';
-      import { useNavigate } from 'react-router-dom';
+  const boilerplateCode = (teamName, teamPath) => `
+    import React from 'react';
+    import { useNavigate } from 'react-router-dom';
 
-      const A${teamName} = () => {
-          const navigate = useNavigate();
+    const A${teamName} = () => {
+        const navigate = useNavigate();
 
-          const navigateToEmployee = () => {
-              navigate('/dashboard/${teamPath}/employee');
-          };
+        const navigateToEmployee = () => {
+            navigate('/dashboard/${teamPath}/employee');
+        };
 
-          return (
-              <div>
-                  <h1>Hello from ${teamName}</h1>
-                  <button onClick={navigateToEmployee}>Go to Employee</button>
-              </div>
-          );
-      };
+        return (
+            <div>
+                <h1>Hello from ${teamName}</h1>
+                <button onClick={navigateToEmployee}>Go to Employee</button>
+            </div>
+        );
+    };
 
-      export default A${teamName};
-  `;
+    export default A${teamName};
+`;
+
+
 
   try {
       ensureDirectoryExistence(basePath);
