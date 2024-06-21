@@ -5,8 +5,12 @@ import bcrypt from 'bcrypt'
 import multer from "multer";
 import path from "path";
 import fs from "fs"
+import { fileURLToPath } from 'url';
 
+// Setup express router
 const router = express.Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,13 +25,13 @@ const storage = multer.diskStorage({
   });
 
 
-  router.post('/auth/api/create-team', (req, res) => {
+  router.post('/auth/create-team', (req, res) => {
     const { teamName } = req.body;
   
-    const teamFolderPath = path.join(process.cwd(), 'src', 'Components', 'Admin', `A${teamName}`);
+    const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);
     const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
   
-    const boilerplateCode = (apiEndpoint, teamPath) => `
+    const boilerplateCode = (teamPath) => `
   import React from 'react';
   import { useNavigate } from 'react-router-dom';
   
@@ -51,7 +55,7 @@ const storage = multer.diskStorage({
   
     // Create team folder
     if (!fs.existsSync(teamFolderPath)) {
-      fs.mkdirSync(teamFolderPath);
+      fs.mkdirSync(teamFolderPath, { recursive: true });
     } else {
       return res.status(400).json({ message: 'Folder already exists' });
     }
@@ -59,12 +63,11 @@ const storage = multer.diskStorage({
     // Create JSX files with boilerplate code
     files.forEach(file => {
       const filePath = path.join(teamFolderPath, file);
-      fs.writeFileSync(filePath, boilerplateCode(`/api/${teamName.toLowerCase()}`, teamName.toLowerCase()), 'utf8');
+      fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
     });
   
     res.status(201).json({ message: 'Team created successfully' });
   });
-
 
 
 

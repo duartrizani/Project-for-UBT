@@ -15,9 +15,11 @@ const CreateTeam = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/auth/api/create-team', { teamName });
-      // Navigate to the newly created team's page
-      navigate(`/dashboard/${teamName.toLowerCase()}`);
+      const response = await axios.post('/auth/create-team', { teamName });
+      if (response.status === 201) {
+        // Navigate to the newly created team's page
+        navigate(`/dashboard/${teamName.toLowerCase()}`);
+      }
     } catch (error) {
       console.error('Error creating team:', error);
     }
