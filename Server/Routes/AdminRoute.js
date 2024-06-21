@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
   });
 
 
-  app.post('/auth/api/create-team', (req, res) => {
+  router.post('/auth/api/create-team', (req, res) => {
     const { teamName } = req.body;
   
     const teamFolderPath = path.join(process.cwd(), 'src', 'Components', 'Admin', `A${teamName}`);

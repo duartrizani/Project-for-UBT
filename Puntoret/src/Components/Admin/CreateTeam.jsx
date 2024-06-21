@@ -15,9 +15,9 @@ const CreateTeam = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/create-team', { teamName });
+      const response = await axios.post('/auth/api/create-team', { teamName });
       // Navigate to the newly created team's page
-      navigate(`/admin/${teamName.toLowerCase()}`);
+      navigate(`/dashboard/${teamName.toLowerCase()}`);
     } catch (error) {
       console.error('Error creating team:', error);
     }
