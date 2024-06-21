@@ -24,6 +24,10 @@ const Dashboard = () => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
+  const handleCreateTeam = () => {
+    navigate('/dashboard/create-team');
+  };
+
   return (
     <div className="flex">
       <div className="col-auto col-md-3 col-xl-2 bg-dark text-white hidden lg:block">
@@ -34,6 +38,7 @@ const Dashboard = () => {
           >
             <span className="text-2xl font-bold">UBT Project</span>
           </Link>
+          <button onClick={handleCreateTeam}>Create New Team</button>
           <ul className="nav liclass flex-col w-full ">
             <li className="w-full liclass">
               <Link
