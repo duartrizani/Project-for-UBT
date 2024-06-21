@@ -15,7 +15,7 @@ const CreateTeam = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/auth/create-team', { teamName });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/create-team`, { teamName });
       if (response.status === 201) {
         // Navigate to the newly created team's page
         navigate(`/dashboard/${teamName.toLowerCase()}`);

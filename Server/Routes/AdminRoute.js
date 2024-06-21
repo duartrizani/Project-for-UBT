@@ -24,10 +24,10 @@ const storage = multer.diskStorage({
     storage: storage
   });
 
-
+  
   router.post('/auth/create-team', (req, res) => {
     const { teamName } = req.body;
-  
+    
     const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);
     const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
   
@@ -68,7 +68,9 @@ const storage = multer.diskStorage({
   
     res.status(201).json({ message: 'Team created successfully' });
   });
-
+  
+  export { router as adminRouter };
+  
 
 
 
