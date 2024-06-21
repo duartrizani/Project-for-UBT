@@ -24,52 +24,54 @@ const storage = multer.diskStorage({
     storage: storage
   });
 
+
+
+
+
   
-  router.post('/auth/create-team', (req, res) => {
+  router.post('/create-team', (req, res) => {
     const { teamName } = req.body;
-    
+
     const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);
     const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
-  
+
     const boilerplateCode = (teamPath) => `
-  import React from 'react';
-  import { useNavigate } from 'react-router-dom';
-  
-  const Component = () => {
-    const navigate = useNavigate();
-  
-    const navigateToEmployee = () => {
-      navigate('/admin/${teamPath}/employee');
-    };
-  
-    return (
-      <div>
-        <h1>Hello from ${teamName}</h1>
-        <button onClick={navigateToEmployee}>Go to Employee</button>
-      </div>
-    );
-  };
-  
-  export default Component;
-  `;
-  
+      import React from 'react';
+      import { useNavigate } from 'react-router-dom';
+
+      const Component = () => {
+        const navigate = useNavigate();
+
+        const navigateToEmployee = () => {
+          navigate('/admin/${teamPath}/employee');
+        };
+
+        return (
+          <div>
+            <h1>Hello from ${teamName}</h1>
+            <button onClick={navigateToEmployee}>Go to Employee</button>
+          </div>
+        );
+      };
+
+      export default Component;
+    `;
+
     // Create team folder
     if (!fs.existsSync(teamFolderPath)) {
       fs.mkdirSync(teamFolderPath, { recursive: true });
     } else {
       return res.status(400).json({ message: 'Folder already exists' });
     }
-  
+
     // Create JSX files with boilerplate code
     files.forEach(file => {
       const filePath = path.join(teamFolderPath, file);
       fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
     });
-  
+
     res.status(201).json({ message: 'Team created successfully' });
-  });
-  
-  export { router as adminRouter };
+});
   
 
 
