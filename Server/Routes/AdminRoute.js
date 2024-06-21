@@ -32,6 +32,8 @@ const storage = multer.diskStorage({
   router.post('/create-team', (req, res) => {
     const { teamName } = req.body;
 
+    console.log('Received request to create team:', teamName);
+
     const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);
     const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
 
@@ -57,22 +59,27 @@ const storage = multer.diskStorage({
       export default Component;
     `;
 
-    // Create team folder
-    if (!fs.existsSync(teamFolderPath)) {
-      fs.mkdirSync(teamFolderPath, { recursive: true });
-    } else {
-      return res.status(400).json({ message: 'Folder already exists' });
+    try {
+        if (!fs.existsSync(teamFolderPath)) {
+            fs.mkdirSync(teamFolderPath, { recursive: true });
+        } else {
+            console.error('Folder already exists:', teamFolderPath);
+            return res.status(400).json({ message: 'Folder already exists' });
+        }
+
+        files.forEach(file => {
+            const filePath = path.join(teamFolderPath, file);
+            fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
+        });
+
+        console.log('Team created successfully:', teamFolderPath);
+        res.status(201).json({ message: 'Team created successfully' });
+    } catch (error) {
+        console.error('Error creating team:', error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
-
-    // Create JSX files with boilerplate code
-    files.forEach(file => {
-      const filePath = path.join(teamFolderPath, file);
-      fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
-    });
-
-    res.status(201).json({ message: 'Team created successfully' });
 });
-  
+
 
 
 
