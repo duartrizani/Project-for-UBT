@@ -40,17 +40,15 @@ router.post('/create-team', (req, res) => {
     const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', teamName);
 
     try {
-        ensureDirectoryExistence(basePath);
+      // Check if teamName exists and create directory
+      const teamDirectory = path.join(__dirname, 'Puntoret', 'src', 'Components', 'Admin', teamName);
+      fs.mkdirSync(teamDirectory, { recursive: true });
 
-        // Optional: Create files inside the newly created directory if needed
-        // fs.writeFileSync(path.join(basePath, 'exampleFile.txt'), 'Hello, World!', 'utf8');
-
-        console.log('Team created successfully:', basePath);
-        res.status(201).json({ message: 'Team created successfully' });
-    } catch (error) {
-        console.error('Error creating team:', error);
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }
+      res.status(201).json({ message: 'Team created successfully' });
+  } catch (error) {
+      console.error('Error creating team:', error);
+      res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  }
 });
 
 
