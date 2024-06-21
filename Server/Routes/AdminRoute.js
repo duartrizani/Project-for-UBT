@@ -28,60 +28,59 @@ const storage = multer.diskStorage({
 
 
 
+
+const ensureDirectoryExistence = (dirPath) => {
+  if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+  }
+};
+
+
   
-  router.post('/create-team', (req, res) => {
-    const { teamName } = req.body;
+router.post('/create-team', (req, res) => {
+  const { teamName } = req.body;
 
-    if (!teamName || !/^[a-zA-Z0-9-_]+$/.test(teamName)) {
-        return res.status(400).json({ message: 'Invalid team name' });
-    }
+  console.log('Received request to create team:', teamName);
 
-    console.log('Received request to create team:', teamName);
+  const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', `A${teamName}`);
+  const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
 
-    const teamFolderPath = path.join(__dirname, '..', 'src', 'Components', 'Admin', `A${teamName}`);
-    const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
-
-    const boilerplateCode = (teamPath) => `
+  const boilerplateCode = (teamPath) => `
       import React from 'react';
       import { useNavigate } from 'react-router-dom';
 
       const Component = () => {
-        const navigate = useNavigate();
+          const navigate = useNavigate();
 
-        const navigateToEmployee = () => {
-          navigate('/admin/${teamPath}/employee');
-        };
+          const navigateToEmployee = () => {
+              navigate('/dashboard/${teamPath}/employee');
+          };
 
-        return (
-          <div>
-            <h1>Hello from ${teamName}</h1>
-            <button onClick={navigateToEmployee}>Go to Employee</button>
-          </div>
-        );
+          return (
+              <div>
+                  <h1>Hello from ${teamName}</h1>
+                  <button onClick={navigateToEmployee}>Go to Employee</button>
+              </div>
+          );
       };
 
       export default Component;
-    `;
+  `;
 
-    try {
-        if (!fs.existsSync(teamFolderPath)) {
-            fs.mkdirSync(teamFolderPath, { recursive: true });
-        } else {
-            console.error('Folder already exists:', teamFolderPath);
-            return res.status(400).json({ message: 'Folder already exists' });
-        }
+  try {
+      ensureDirectoryExistence(basePath);
 
-        files.forEach(file => {
-            const filePath = path.join(teamFolderPath, file);
-            fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
-        });
+      files.forEach(file => {
+          const filePath = path.join(basePath, file);
+          fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
+      });
 
-        console.log('Team created successfully:', teamFolderPath);
-        res.status(201).json({ message: 'Team created successfully' });
-    } catch (error) {
-        console.error('Error creating team:', error);
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }
+      console.log('Team created successfully:', basePath);
+      res.status(201).json({ message: 'Team created successfully' });
+  } catch (error) {
+      console.error('Error creating team:', error);
+      res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  }
 });
 
 
