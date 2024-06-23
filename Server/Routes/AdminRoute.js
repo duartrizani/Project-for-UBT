@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 import multer from "multer";
 import path from "path";
-import fs from "fs"
+
 
 // Setup express router
 const router = express.Router();
@@ -20,69 +20,6 @@ const storage = multer.diskStorage({
   const upload = multer({
     storage: storage
   });
-
-
-
-
-
-
-const ensureDirectoryExistence = (dirPath) => {
-  if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-  }
-};
-
-
-  
-router.post('/create-team', (req, res) => {
-  const { teamName } = req.body;
-
-  console.log('Received request to create team:', teamName);
-
-  const basePath = path.join(__dirname, '..', 'Puntoret', 'src', 'Components', 'Admin', `A${teamName}`);
-  const files = ['File1.jsx', 'File2.jsx', 'File3.jsx', 'File4.jsx', 'File5.jsx', 'File6.jsx'];
-
-  const boilerplateCode = (teamName, teamPath) => `
-    import React from 'react';
-    import { useNavigate } from 'react-router-dom';
-
-    const A${teamName} = () => {
-        const navigate = useNavigate();
-
-        const navigateToEmployee = () => {
-            navigate('/dashboard/${teamPath}/employee');
-        };
-
-        return (
-            <div>
-                <h1>Hello from ${teamName}</h1>
-                <button onClick={navigateToEmployee}>Go to Employee</button>
-            </div>
-        );
-    };
-
-    export default A${teamName};
-`;
-
-
-
-  try {
-      ensureDirectoryExistence(basePath);
-
-      files.forEach(file => {
-          const filePath = path.join(basePath, file);
-          fs.writeFileSync(filePath, boilerplateCode(teamName.toLowerCase()), 'utf8');
-      });
-
-      console.log('Team created successfully:', basePath);
-      res.status(201).json({ message: 'Team created successfully' });
-  } catch (error) {
-      console.error('Error creating team:', error);
-      res.status(500).json({ message: 'Internal Server Error', error: error.message });
-  }
-});
-
-
 
 
 
