@@ -70,7 +70,7 @@ import ASoundEditLista from './Components/Admin/ASoundEffect/ASoundEditLista'
 import ASoundAddLista from './Components/Admin/ASoundEffect/ASoundAddLista'
 import ASoundOret from './Components/Admin/ASoundEffect/ASoundOret'
 import ASoundPuntoret from './Components/Admin/ASoundEffect/ASoundPuntoret'
-import CreateTeam from './Components/Admin/CreateTeam'
+
 
 
 
@@ -182,7 +182,6 @@ function App() {
           </PrivateRoute>
         }>
           <Route path='' element={<Home />}></Route>
-          <Route path='/dashboard/create-team' element={<CreateTeam />}></Route>
           
 
         {/* Game Design */}
